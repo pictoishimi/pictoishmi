@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule a Call - Pictoishmi</title>
+    <link rel="icon" type="image/x-icon" style="border-radius: 60%;" href="assets/images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'dark-primary': '#000B3E',
+                        'brand-purple': '#c47bd9',
+                        'brand-purple-dark': '#b065c6',
+                        'light-bg': '#f8f9fa',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Enhanced Mobile Responsive Styles - No Scrollbars */
+        html, body { 
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        body { 
+            background-color: #000b3e; 
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', 'sans-serif'; }
+        .nav-link.active {
+            color: #c47bd9 !important;
+            font-weight: 600;
+        }
+        .nav-link { color: white; transition: color 0.3s ease; font-weight: 500; }
+        .nav-link:hover { color: rgba(255, 255, 255, 0.8); }
+
+        /* Mobile-First Holographic Button Styles */
+        .holographic-button {
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .holographic-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: #b065c6;
+        }
+        .holographic-button > * { position: relative; z-index: 2; }
+        .holographic-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .holographic-button:hover::after { opacity: 1; }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        .primary-button {
+            background: #c47bd9;
+            color: white;
+            font-weight: 600;
+        }
+        .primary-button:hover {
+            background: #b065c6;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(196, 123, 217, 0.4);
+        }
+
+        /* Mobile-Optimized Floating Animations */
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #c47bd9, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glass Morphism - Mobile Optimized */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(196, 123, 217, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Particle Background - Reduced for Mobile Performance */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(196, 123, 217, 0.1);
+            border-radius: 50%;
+            animation: float-particle 15s infinite linear;
+        }
+
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        /* Pulse Animation */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(196, 123, 217, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(196, 123, 217, 0.5); }
+        }
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Google Calendar Container Styling */
+        .calendar-container {
+            width: 100%;
+            min-height: 650px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .calendar-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 650px;
+            border: none;
+        }
+
+        /* Mobile-Specific Improvements - No Horizontal Scroll */
+        @media (max-width: 768px) {
+            /* Reduce particle count for mobile performance */
+            .particle {
+                display: none;
+            }
+            
+            /* Improve mobile menu touch targets */
+            #mobile-menu a {
+                padding: 16px 12px;
+                font-size: 18px;
+            }
+            
+            /* Calendar mobile optimization */
+            .calendar-container {
+                min-height: 700px;
+            }
+            
+            .calendar-container iframe {
+                min-height: 700px;
+            }
+            
+            /* Ensure no horizontal overflow */
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Extra small device optimizations */
+            /* Calendar mobile optimization */
+            .calendar-container {
+                min-height: 750px;
+            }
+            
+            .calendar-container iframe {
+                min-height: 750px;
+            }
+            
+            /* Reduce padding on very small screens */
+            .glass-card {
+                padding: 16px 12px !important;
+            }
+
+            /* Ensure containers don't cause overflow */
+            .container {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+        }
+
+        /* Prevent horizontal scrolling globally */
+        * {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* Ensure grid items don't overflow */
+        .grid {
+            width: 100%;
+        }
+
+        /* Fix for any potential overflow issues */
+        section, div, form {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body class="font-sans bg-dark-primary min-h-screen">
+    <!-- Enhanced Mobile Navigation -->
+    <nav class="fixed w-full z-50 px-3 pt-3 sm:px-4 sm:pt-4">
+        <div id="nav-container" class="backdrop-blur-lg bg-white/10 rounded-[32px] sm:rounded-[50px] mx-2 sm:mx-4 transition-all duration-300">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <a href="index.html">
+                            <img src="assets/images/logo.png" alt="Pictoishmi Logo" class="h-7 sm:h-8 w-auto">
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center justify-center flex-1">
+                        <div class="flex gap-8 lg:gap-12">
+                            <a href="index.html" class="nav-link">Home</a>
+                            <a href="about.html" class="nav-link">About us</a>
+                            <a href="services.html" class="nav-link">Services</a>
+                            <a href="blog.html" class="nav-link">Blog</a>
+                        </div>
+                    </div>
+                    <div class="hidden md:block">
+                        <a href="contact.html" class="bg-white text-[#000B3E] px-6 sm:px-8 py-2 rounded-full hover:bg-gray-100 transition-colors font-medium text-sm sm:text-base whitespace-nowrap">
+                            Book a Free Call
+                        </a>
+                    </div>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-white p-3 rounded-lg hover:bg-white/10 transition-colors" aria-label="Toggle menu">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Enhanced Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed w-full bg-[#000B3E] shadow-lg z-40 top-16 sm:top-20 rounded-b-2xl left-0 right-0">
+        <div class="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
+            <div class="flex flex-col space-y-2 sm:space-y-4">
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors py-3 sm:py-4 text-lg sm:text-xl text-center border-b border-white/10">Home</a>
+                <a href="about.html" class="text-white hover:text-gray-200 transition-colors py-3 sm:py-4 text-lg sm:text-xl text-center border-b border-white/10">About us</a>
+                <a href="services.html" class="text-white hover:text-gray-200 transition-colors py-3 sm:py-4 text-lg sm:text-xl text-center border-b border-white/10">Services</a>
+                <a href="blog.html" class="text-white hover:text-gray-200 transition-colors py-3 sm:py-4 text-lg sm:text-xl text-center border-b border-white/10">Blog</a>
+                <a href="contact.html" class="bg-white text-[#000B3E] px-6 py-4 rounded-full hover:bg-gray-100 transition-colors inline-block text-center font-medium mt-4 text-lg whitespace-nowrap">
+                    Book a Free Call
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="particles-container" id="particles-container"></div>
+
+    <!-- Hero Section - Mobile Optimized -->
+    <section class="pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#000B3E] to-[#1E3A8A]"></div>
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center max-w-4xl mx-auto w-full">
+                <h1 class="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 px-2" data-aos="fade-up">
+                    Let's <span class="gradient-text">Connect</span>
+                </h1>
+                <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-6 sm:mb-8 px-2" data-aos="fade-up" data-aos-delay="100">
+                    Schedule a personalized consultation to discuss your project and goals.
+                </p>
+                <div class="floating-element" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="inline-block p-3 sm:p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 max-w-xs sm:max-w-none mx-auto">
+                        <span class="text-white text-base sm:text-lg">📅 Find the perfect time for your call</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Calendar Booking Section - Mobile Optimized -->
+    <section class="py-12 sm:py-16 md:py-20 relative">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto w-full">
+                <div class="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 w-full">
+                    <h2 class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center mb-2" data-aos="fade-up">
+                        Schedule Your <span class="gradient-text">Call</span>
+                    </h2>
+                    <p class="text-gray-300 text-center mb-6 sm:mb-8 text-sm sm:text-base" data-aos="fade-up" data-aos-delay="100">
+                        Book a time that works for you directly through Calendar
+                    </p>
+                    
+                    <!-- Google Calendar Appointment Scheduling Embed -->
+                    <div class="w-full" data-aos="fade-up" data-aos-delay="200">
+                        <div class="calendar-container">
+                            <!-- Calendly inline widget begin -->
+<div class="calendly-inline-widget" data-url="https://calendly.com/pictoishmi/free-strategy-call" style="min-width:320px;height:700px;"></div>
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<!-- Calendly inline widget end -->
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 text-center">
+                        <p class="text-gray-400 text-sm">
+                            Having trouble with the scheduler? 
+                            <a href="mailto:contact@pictoishmi.com" class="text-brand-purple hover:text-brand-purple-dark transition-colors">
+                                Contact us directly
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section - Mobile Optimized -->
+    <section class="py-12 sm:py-16 md:py-20 bg-gradient-to-b from-dark-primary to-[#1E3A8A]">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-white text-center mb-8 sm:mb-12" data-aos="fade-up">
+                Frequently Asked Questions
+            </h2>
+            <div class="grid grid-cols-1 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto w-full">
+                <div class="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 w-full">
+                    <h3 class="font-heading text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3">How long are the consultation calls?</h3>
+                    <p class="text-gray-300 text-sm sm:text-base">Initial consultation calls are typically 30 minutes. For more complex projects, we can schedule a longer follow-up session.</p>
+                </div>
+                <div class="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 w-full">
+                    <h3 class="font-heading text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3">What should I prepare for the call?</h3>
+                    <p class="text-gray-300 text-sm sm:text-base">Think about your goals, target audience, and any specific challenges you're facing. This will help us provide the most value during our conversation.</p>
+                </div>
+                <div class="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 w-full">
+                    <h3 class="font-heading text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3">Can I reschedule my call?</h3>
+                    <p class="text-gray-300 text-sm sm:text-base">Yes, you can reschedule up to 24 hours before your scheduled call time. Use the rescheduling section above to change your appointment.</p>
+                </div>
+                <div class="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 w-full">
+                    <h3 class="font-heading text-lg sm:text-xl font-semibold text-white mb-2 sm:mb-3">What happens after the call?</h3>
+                    <p class="text-gray-300 text-sm sm:text-base">We'll send a follow-up email with a summary of our discussion and any next steps or proposals if applicable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-primary py-8 md:py-12 border-t border-white/10">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="mb-2 md:mb-0 text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start">
+                        <img src="assets/images/logo.png" alt="Pictoishmi Logo" class="h-8 md:h-12 mr-3">
+                    </div>
+                    <p class="text-gray-400 mt-1 text-xs">Helping businesses grow digitally</p>
+                </div>
+
+                <div class="flex space-x-4">
+                    <a href="#" aria-label="Follow us on LinkedIn" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="assets/images/Linkdin-white.png" alt="LinkedIn">
+                    </a>
+                    <a href="#" aria-label="Follow us on Facebook" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="assets/images/facebook-white.png" alt="Facebook">
+                    </a>
+                    <a href="#" aria-label="Follow us on Instagram" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="assets/images/IG-white.png" alt="Instagram">
+                    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-6 md:mt-8 pt-6 md:pt-8">
+                <div class="flex flex-wrap justify-center gap-3 mb-4 text-xs md:text-sm">
+                    <a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="cookie-policy.html" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a>
+                    <a href="terms-of-service.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                </div>
+                <div class="text-center text-gray-500 text-sm md:text-base">
+                    <p>&copy; 2025 Pictoishmi. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    // Enhanced mobile-responsive script with scrollbar prevention
+    // Initialize AOS with mobile optimizations
+    AOS.init({
+        duration: 600,
+        easing: 'ease-out-cubic',
+        once: true,
+        offset: 100,
+        disable: function() {
+            return window.innerWidth < 768;
+        }
+    });
+
+    // Enhanced particle creation with mobile optimization
+    function createParticles() {
+        // ... (your particle code is unchanged)
+    }
+
+    // Enhanced mobile menu functionality
+    function initializeMobileMenu() {
+        // ... (your mobile menu code is unchanged)
+    }
+
+    //
+    // --- 1. DEFINE THE NAVBAR FUNCTION HERE ---
+    //
+    function updateNavbar() {
+        // --- IMPORTANT ---
+        // Get the navContainer element here. 
+        // Make sure your navbar has an ID, for example: id="nav-container"
+        const navContainer = document.getElementById('nav-container'); 
+        
+        // If the element doesn't exist, stop the function to avoid errors
+        if (!navContainer) {
+            console.error('Navbar element not found!');
+            return;
+        }
+
+        if (window.scrollY > 10) {
+            navContainer.style.background = 'rgba(0, 11, 62, 0.95)';
+            navContainer.style.backdropFilter = 'blur(20px)';
+        } else {
+            navContainer.style.background = 'rgba(255, 255, 255, 0.1)';
+            navContainer.style.backdropFilter = 'blur(16px)';
+        }
+    }
+    //
+    // --- END OF NAVBAR FUNCTION DEFINITION ---
+    //
+
+
+    function initializeApp() {
+        createParticles();
+        initializeMobileMenu();
+
+        //
+        // --- 2. ADD THE NAVBAR LISTENERS HERE ---
+        //
+        window.addEventListener('scroll', updateNavbar);
+        updateNavbar(); // Call once to set initial state
+        //
+        // --- END OF NAVBAR LISTENERS ---
+        //
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    } else {
+        initializeApp();
+    }
+</script>
+</body>
+</html>

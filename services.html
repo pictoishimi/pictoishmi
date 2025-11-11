@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Our Services - Pictoishmi</title>
+    <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'dark-primary': '#000B3E',
+                        'brand-purple': '#c47bd9',
+                        'brand-purple-dark': '#b065c6',
+                        'light-bg': '#f8f9fa',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ---------- Base (theme preserved) ---------- */
+        :root {
+            --dark-primary: #000B3E;
+            --brand-purple: #c47bd9;
+            --brand-purple-dark: #b065c6;
+            --light-bg: #f8f9fa;
+        }
+
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-primary);
+            color: #111827;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        h1,h2,h3,h4,h5,h6 { font-family: 'Montserrat', sans-serif; }
+
+        /* nav / buttons / cards (kept original look) */
+        nav { transition: all 0.25s ease; }
+        .nav-link { color: white; transition: color 0.2s ease; font-weight: 500; text-decoration: none; }
+        .nav-link:hover { color: rgba(255,255,255,0.85); }
+        .nav-link.active { color: var(--brand-purple) !important; font-weight: 600; }
+
+        .holographic-button { font-weight: 500; transition: all 0.25s ease; border: none; position: relative; overflow: hidden; z-index: 1; -webkit-tap-highlight-color: transparent; }
+        .holographic-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.18), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .holographic-button:hover::after { opacity: 1; }
+        @keyframes shimmer { 0%{ transform: translateX(-100%) rotate(45deg);} 100%{ transform: translateX(100%) rotate(45deg);} }
+        .primary-button { background: var(--brand-purple); color: #fff; font-weight: 600; }
+        .primary-button:hover { background: var(--brand-purple-dark); transform: translateY(-2px); box-shadow: 0 12px 24px rgba(196,123,217,0.28); }
+
+        .secondary-button { background: transparent; color: white; border: 2px solid var(--brand-purple); }
+        .secondary-button:hover { background: rgba(196,123,217,0.06); border-color: var(--brand-purple-dark); }
+
+        .service-card { position: relative; overflow: hidden; transition: all 0.28s ease-in-out; background-color: #fff; border: 1px solid #eee; z-index: 1; }
+        .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,11,62,0.08); border-color: transparent; }
+        .service-card::before {
+            content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, transparent, rgba(196,123,217,0.28), rgba(0,11,62,0.06)); opacity: 0; transition: all 0.45s ease; transform: scale(1.15); z-index: -1;
+        }
+        .service-card:hover::before { opacity: 1; transform: scale(1); }
+
+        .service-icon { width: 80px; height: 80px; display:flex; align-items:center; justify-content:center; border-radius:18px; background: linear-gradient(135deg,#f0e6f7,#fff); color: var(--brand-purple); box-shadow: 0 10px 15px -4px rgba(196,123,217,0.2); margin-bottom: 18px; flex-shrink: 0; }
+
+        .glass-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.25s ease; }
+        .glass-card:hover { transform: translateY(-5px); border-color: rgba(196,123,217,0.22); box-shadow: 0 18px 30px rgba(0,0,0,0.18); }
+
+        .floating-element { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)} }
+
+        .gradient-text { background: linear-gradient(135deg,var(--brand-purple),#667eea); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+        .particles-container { position: absolute; inset: 0; width:100%; height:100%; overflow:hidden; z-index:0; pointer-events:none; }
+        .particle { position:absolute; background: rgba(196,123,217,0.1); border-radius:50%; animation: float-particle 15s linear infinite; }
+        @keyframes float-particle{0%{transform:translateY(100vh) rotate(0deg)}100%{transform:translateY(-120px) rotate(360deg)}}
+
+        .progress-bar{ background: rgba(255,255,255,0.08); border-radius:10px; overflow:hidden; position:relative; height:10px; }
+        .progress-fill{ background: linear-gradient(90deg,var(--brand-purple),var(--brand-purple-dark)); height:100%; width:0%; transition: width 1.4s ease-in-out; }
+
+        .stats-icon { width:48px;height:48px;border-radius:12px; display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(196,123,217,0.18),rgba(196,123,217,0.1)); margin:0 auto 12px auto; }
+
+        /* Accessibility & touch targets */
+        a, button { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+        a:focus, button:focus, input:focus { outline: none; box-shadow: 0 0 0 4px rgba(196,123,217,0.12); border-radius: 8px; }
+
+        /* Container utility */
+        .container { width: 100%; margin: 0 auto; padding-left: 1.25rem; padding-right: 1.25rem; max-width: 1200px; box-sizing: border-box; }
+
+        /* Small text color adjustments kept */
+        .text-dark-primary { color: var(--dark-primary); }
+        .text-gray-600 { color: #4b5563; }
+        .text-gray-300 { color: #d1d5db; }
+
+        /* Prevent horizontal overflow */
+        *{ box-sizing: border-box; }
+        img{ max-width:100%; height:auto; display:block; }
+
+        /* ---------- Responsive improvements (new) ---------- */
+
+        /* Layout breakpoints are mobile-first */
+        .nav-inner { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+
+        /* Mobile menu */
+        #mobile-menu { position: fixed; left: 0; right: 0; z-index: 40; background: var(--dark-primary); padding: 16px 0; border-bottom-left-radius: 18px; border-bottom-right-radius: 18px; box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+
+        /* Hero text scaling */
+        .hero-title { font-size: 2rem; line-height: 1.05; }
+        .hero-sub { font-size: 1rem; }
+
+        /* Service grid defaults — adaptively collapse */
+        .services-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+        .services-grid-lg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+        /* Stats grid responsive */
+        .stats-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; }
+        .stats-grid-md { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; }
+
+        /* Feature grid */
+        .feature-grid { display:grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; }
+
+        /* Process steps: hide bridging line on small screens */
+        .process-step::before { content: ''; position: absolute; top: 28px; left: -20px; width: 40px; height: 2px; background: linear-gradient(90deg, var(--brand-purple), transparent); transform-origin: left; }
+        .process-step:first-child::before { display: none; }
+
+        /* CTA buttons: stacked on small screens */
+        .cta-actions { display:flex; gap: 12px; align-items: center; justify-content: center; }
+
+        /* small devices */
+        @media (max-width: 1024px) {
+            .container { padding-left: 1rem; padding-right: 1rem; }
+            .hero-title { font-size: 2.25rem; }
+            .hero-sub { font-size: 1.05rem; }
+            .services-grid-lg { grid-template-columns: repeat(2,1fr); gap: 1rem; }
+        }
+
+
+        @media (max-width: 768px) {
+            /* nav tweaks */
+            .nav-inner { gap: 8px; }
+            .hero-title { font-size: 1.7rem; }
+            .hero-sub { font-size: 0.98rem; }
+
+            /* grid collapse -> single column stacks */
+            .services-grid-lg { grid-template-columns: 1fr; gap: 1rem; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+            .stats-grid > div { padding: 12px; }
+
+            /* service-card padding / touch targets */
+            .service-card { padding: 18px; border-radius: 14px; }
+            .service-card .service-icon { width: 72px; height: 72px; border-radius: 14px; margin-bottom: 16px; }
+
+            /* cta layout */
+            .cta-actions { flex-direction: column; gap: 12px; }
+            .cta-actions a { width: 100%; text-align:center; }
+
+            /* process step connector hidden on small */
+            .process-step::before { display: none; }
+
+            /* reduce particle rendering for perf */
+            .particle { display: none; }
+
+            /* hero container paddings */
+            section { padding-left: 1rem; padding-right: 1rem; }
+
+            /* hero spacing */
+            .pt-24 { padding-top: 5.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.6rem; }
+            .hero-sub { font-size: 0.95rem; }
+            .service-icon { width: 64px; height: 64px; }
+            .stats-icon { width:44px;height:44px; }
+            .progress-bar { height: 8px; }
+        }
+
+        /* Larger screens keep original feel */
+        @media (min-width: 1200px) {
+            .hero-title { font-size: 3.25rem; }
+            .services-grid { grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+            .feature-grid { grid-template-columns: repeat(2,1fr); }
+            .stats-grid { grid-template-columns: repeat(2,1fr); }
+        }
+    </style>
+</head>
+<body class="font-sans bg-dark-primary min-h-screen text-white">
+
+    <nav class="fixed w-full z-50 px-4 pt-4">
+        <div id="nav-container" class="backdrop-blur-lg bg-white/10 rounded-[50px] mx-2 sm:mx-4 transition-all duration-300">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <a href="index.html" class="flex items-center">
+                            <img src="assets/images/logo.png" alt="Pictoishmi Logo" class="h-6 sm:h-8">
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center justify-center flex-1">
+                        <div class="flex gap-8 lg:gap-12">
+                            <a href="#home" class="nav-link active text-sm lg:text-base">Home</a>
+                            <a href="about.html" class="nav-link text-sm lg:text-base">About us</a>
+                            <a href="services.html" class="nav-link text-sm lg:text-base">Services</a>
+                            <a href="blog.html" class="nav-link text-sm lg:text-base">Blog</a>
+                        </div>
+                    </div>
+                    <div class="hidden md:block">
+                        <a href="contact.html" class="bg-white text-[#000B3E] px-6 py-2 lg:px-8 lg:py-2 rounded-full hover:bg-gray-100 transition-colors font-medium text-sm lg:text-base">
+                            Book a Free Call
+                        </a>
+                    </div>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-white p-2" aria-label="Toggle mobile menu">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed w-full bg-[#000B3E] shadow-md z-40 top-16 rounded-b-2xl">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex flex-col space-y-3">
+                <a href="index.html" class="text-white active hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Home</a>
+                <a href="about.html" class="text-white hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">About us</a>
+                <a href="services.html" class="text-white hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Services</a>
+                <a href="blog.html" class="text-white hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Blog</a>
+                <a href="contact.html" class="bg-white text-[#000B3E] px-6 py-3 rounded-full hover:bg-gray-100 transition-colors inline-block text-center font-medium mt-2 text-base">
+                    Book a Free Call
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Particles container (reduced on mobile by JS) -->
+    <div id="particles-container" class="particles-container" aria-hidden="true"></div>
+
+    <!-- HERO -->
+    <section class="pt-24 md:pt-32 pb-16 md:pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#000B3E] to-[#1E3A8A]" aria-hidden="true"></div>
+        <div class="container mx-auto px-4 md:px-6 relative z-10 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="hero-title font-heading font-bold text-white mb-4 md:mb-6" data-aos="fade-up">
+                    Our <span class="gradient-text">Services</span>
+                </h1>
+                <p class="hero-sub text-gray-300 mb-6 md:mb-8" data-aos="fade-up" data-aos-delay="100">
+                    Comprehensive digital marketing solutions designed to elevate your brand and drive real results.
+                </p>
+                <div class="floating-element inline-block" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="inline-block p-3 md:p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                        <span class="text-white text-sm md:text-base">🚀 Transform your digital presence today</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="py-10 md:py-16 relative">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="services-grid services-grid-lg">
+                <!-- Card 1 -->
+                <div class="service-card rounded-2xl p-6 md:p-8 text-center" data-aos="fade-up">
+                    <div class="service-icon mx-auto" aria-hidden="true">
+                        <!-- icon preserved -->
+                        <svg class="w-8 h-8 md:w-10 md:h-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.94 4.31003C12.35 3.72003 11.45 3.72003 10.86 4.31003L5.61 9.56003H3C2.45 9.56003 2 10.0101 2 10.5601V13.4401C2 13.9901 2.45 14.4401 3 14.4401H5.61L10.86 19.69C11.45 20.28 12.35 20.28 12.94 19.69L13.88 18.75C14.17 18.46 14.34 18.06 14.34 17.65V6.35003C14.34 5.94003 14.17 5.54003 13.88 5.25003L12.94 4.31003Z" fill="url(#paint0_linear)"/>
+                            <path d="M17 8.5C17.83 9.33 18.3 10.42 18.3 11.62C18.3 12.82 17.83 13.91 17 14.74" stroke="#000B3E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M19.8 5.70007C21.17 7.07007 22 8.96007 22 11.0001C22 13.0401 21.17 14.9301 19.8 16.30001" stroke="#000B3E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="paint0_linear" x1="2" y1="12.0001" x2="14.34" y2="12.001" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#c47bd9"/>
+                                    <stop offset="1" stop-color="#b065c6"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <h3 class="font-heading text-xl md:text-2xl font-semibold mb-3 text-dark-primary">Social Media Management</h3>
+                    <p class="text-gray-600 mb-6 text-sm md:text-base">Complete management of your social media presence across all platforms.</p>
+                    <a href="#social-media" class="holographic-button primary-button px-4 md:px-6 py-2 md:py-3 rounded-full inline-block group text-sm md:text-base" role="button">
+                        <span>Learn More</span>
+                    </a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="service-card rounded-2xl p-6 md:p-8 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon mx-auto">
+                        <svg class="w-8 h-8 md:w-10 md:h-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.06 9.02L14.98 9.94L5.92 19H5V18.08L14.06 9.02Z" fill="url(#paint1_linear)"/>
+                            <path d="M17.66 3C17.41 3 17.15 3.1 16.96 3.29L15.13 5.12L18.88 8.87L20.71 7.04C21.1 6.65 21.1 6.02 20.71 5.63L18.37 3.29C18.17 3.09 17.92 3 17.66 3ZM14.06 6.19L3 17.25V21H6.75L17.81 9.94L14.06 6.19Z" fill="#000B3E"/>
+                            <defs>
+                                <linearGradient id="paint1_linear" x1="5" y1="14" x2="14.98" y2="14" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#c47bd9"/>
+                                    <stop offset="1" stop-color="#b065c6"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <h3 class="font-heading text-xl md:text-2xl font-semibold mb-3 text-dark-primary">Content Creation</h3>
+                    <p class="text-gray-600 mb-6 text-sm md:text-base">Stunning visuals and compelling copy that tells your brand's story.</p>
+                    <a href="#content-creation" class="holographic-button primary-button px-4 md:px-6 py-2 md:py-3 rounded-full inline-block group text-sm md:text-base" role="button">
+                        <span>Learn More</span>
+                    </a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="service-card rounded-2xl p-6 md:p-8 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon mx-auto">
+                        <svg class="w-8 h-8 md:w-10 md:h-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 9.2H8V19H5V9.2Z" fill="url(#paint2_linear)"/>
+                            <path d="M10.6 5H13.4V19H10.6V5Z" fill="#000B3E"/>
+                            <path d="M16.2 13H19V19H16.2V13Z" fill="url(#paint3_linear)"/>
+                            <defs>
+                                <linearGradient id="paint2_linear" x1="5" y1="14.1" x2="8" y2="14.1" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#c47bd9"/>
+                                    <stop offset="1" stop-color="#b065c6"/>
+                                </linearGradient>
+                                <linearGradient id="paint3_linear" x1="16.2" y1="16" x2="19" y2="16" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#c47bd9"/>
+                                    <stop offset="1" stop-color="#b065c6"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <h3 class="font-heading text-xl md:text-2xl font-semibold mb-3 text-dark-primary">Ad Campaign Strategy</h3>
+                    <p class="text-gray-600 mb-6 text-sm md:text-base">Data-driven advertising that delivers maximum ROI and growth.</p>
+                    <a href="#ad-campaigns" class="holographic-button primary-button px-4 md:px-6 py-2 md:py-3 rounded-full inline-block group text-sm md:text-base" role="button">
+                        <span>Learn More</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Detail -->
+    <section id="social-media" class="py-10 md:py-16 bg-light-bg text-dark-primary">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="font-heading text-2xl md:text-3xl font-bold mb-4">Social Media Management</h2>
+                    <p class="text-gray-600 mb-6">
+                        We take complete control of your social media presence, from strategy development to daily management.
+                        Our team ensures your brand stays relevant, engaged, and growing across all platforms.
+                    </p>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 bg-brand-purple rounded-full flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <span class="text-gray-700">Content calendar development and scheduling</span>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 bg-brand-purple rounded-full flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <span class="text-gray-700">Community engagement and response management</span>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 bg-brand-purple rounded-full flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <span class="text-gray-700">Performance analytics and reporting</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-dark-primary mb-3">Platform Expertise</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Instagram</span>
+                                    <span class="text-sm font-medium text-brand-purple">95%</span>
+                                </div>
+                                <div class="progress-bar" aria-hidden="true">
+                                    <div class="progress-fill" style="width: 96%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Facebook</span>
+                                    <span class="text-sm font-medium text-brand-purple">97%</span>
+                                </div>
+                                <div class="progress-bar" aria-hidden="true">
+                                    <div class="progress-fill" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">LinkedIn</span>
+                                    <span class="text-sm font-medium text-brand-purple">92%</span>
+                                </div>
+                                <div class="progress-bar" aria-hidden="true">
+                                    <div class="progress-fill" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="contact.html" class="holographic-button primary-button px-6 md:px-8 py-2 md:py-3 rounded-full inline-block">
+                        <span>Start Your Social Growth</span>
+                    </a>
+                </div>
+
+                <div class="stats-grid" data-aos="fade-left">
+                    <div class="glass-card rounded-2xl p-4 md:p-6 text-center bg-dark-primary border border-brand-purple/20">
+                        <div class="stats-icon bg-brand-purple/20">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                        </div>
+                        <div class="text-2xl md:text-3xl font-bold text-white mb-2">50%</div>
+                        <div class="text-gray-200 text-sm md:text-base">Average Engagement Increase</div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-4 md:p-6 text-center bg-dark-primary border border-brand-purple/20">
+                        <div class="stats-icon bg-brand-purple/20">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <div class="text-2xl md:text-3xl font-bold text-white mb-2">3x</div>
+                        <div class="text-gray-200 text-sm md:text-base">Follower Growth Rate</div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-4 md:p-6 text-center bg-dark-primary border border-brand-purple/20">
+                        <div class="stats-icon bg-brand-purple/20">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div class="text-2xl md:text-3xl font-bold text-white mb-2">24/7</div>
+                        <div class="text-gray-200 text-sm md:text-base">Monitoring & Management</div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-4 md:p-6 text-center bg-dark-primary border border-brand-purple/20">
+                        <div class="stats-icon bg-brand-purple/20">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                        </div>
+                        <div class="text-2xl md:text-3xl font-bold text-white mb-2">100+</div>
+                        <div class="text-gray-200 text-sm md:text-base">Campaigns Managed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Creation -->
+    <section id="content-creation" class="py-10 md:py-16 bg-dark-primary text-white">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="order-2 lg:order-1" data-aos="fade-right">
+                    <div class="feature-grid">
+                        <div class="feature-item glass-card rounded-2xl p-4 md:p-6 text-center">
+                            <div class="stats-icon">
+                                <svg class="w-5 h-5 md:w-6 md:h-6 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            </div>
+                            <h4 class="font-semibold text-white mb-2 text-sm md:text-base">Video Production</h4>
+                            <p class="text-gray-300 text-xs md:text-sm">Professional video content for all platforms</p>
+                        </div>
+
+                        <div class="feature-item glass-card rounded-2xl p-4 md:p-6 text-center">
+                            <div class="stats-icon">
+                                <svg class="w-5 h-5 md:w-6 md:h-6 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            </div>
+                            <h4 class="font-semibold text-white mb-2 text-sm md:text-base">Graphic Design</h4>
+                            <p class="text-gray-300 text-xs md:text-sm">Stunning visuals that capture attention</p>
+                        </div>
+
+                        <div class="feature-item glass-card rounded-2xl p-4 md:p-6 text-center">
+                            <div class="stats-icon">
+                                <svg class="w-5 h-5 md:w-6 md:h-6 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                            </div>
+                            <h4 class="font-semibold text-white mb-2 text-sm md:text-base">Copywriting</h4>
+                            <p class="text-gray-300 text-xs md:text-sm">Compelling copy that converts</p>
+                        </div>
+
+                        <div class="feature-item glass-card rounded-2xl p-4 md:p-6 text-center">
+                            <div class="stats-icon">
+                                <svg class="w-5 h-5 md:w-6 md:h-6 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                            </div>
+                            <h4 class="font-semibold text-white mb-2 text-sm md:text-base">Platform Optimization</h4>
+                            <p class="text-gray-300 text-xs md:text-sm">Content tailored for each platform</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2" data-aos="fade-left">
+                    <h2 class="font-heading text-2xl md:text-3xl font-bold mb-4">Content Creation</h2>
+                    <p class="text-gray-300 mb-6">
+                        We create content that doesn't just look good—it performs. Our team of creatives specializes in
+                        producing engaging, platform-optimized content that drives results and builds brand loyalty.
+                    </p>
+
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-white mb-3">Our Process</h4>
+                        <div class="space-y-4">
+                            <div class="process-step relative">
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-brand-purple rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                        <span class="text-white font-semibold text-sm">1</span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-white mb-1">Strategy & Planning</h5>
+                                        <p class="text-gray-300 text-sm">We develop a content strategy aligned with your brand goals</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="process-step relative">
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-brand-purple rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                        <span class="text-white font-semibold text-sm">2</span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-white mb-1">Content Creation</h5>
+                                        <p class="text-gray-300 text-sm">Our team produces high-quality, engaging content</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="process-step relative">
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 bg-brand-purple rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                        <span class="text-white font-semibold text-sm">3</span>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-white mb-1">Optimization</h5>
+                                        <p class="text-gray-300 text-sm">We optimize content for maximum reach and engagement</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="contact.html" class="holographic-button primary-button px-6 md:px-8 py-2 md:py-3 rounded-full inline-block">
+                        <span>Create Amazing Content</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Campaigns -->
+    <section id="ad-campaigns" class="py-10 md:py-16 bg-light-bg text-dark-primary">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+                <h2 class="font-heading text-2xl md:text-3xl font-bold mb-3">Ad Campaign Strategy</h2>
+                <p class="text-gray-600" data-aos="fade-up" data-aos-delay="100">
+                    Data-driven advertising campaigns that deliver measurable results and maximum ROI across all digital platforms.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="service-card rounded-2xl p-6 md:p-8 text-center" data-aos="fade-up">
+                    <div class="stats-icon mb-2">
+                        <svg class="w-6 h-6 md:w-8 md:h-8 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-lg md:text-xl font-semibold mb-2 text-dark-primary">Targeting & Audience</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Precise audience targeting based on data and behavior analysis</p>
+                </div>
+
+                <div class="service-card rounded-2xl p-6 md:p-8 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stats-icon mb-2">
+                        <svg class="w-6 h-6 md:w-8 md:h-8 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-lg md:text-xl font-semibold mb-2 text-dark-primary">Analytics & Reporting</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Comprehensive performance tracking and optimization</p>
+                </div>
+
+                <div class="service-card rounded-2xl p-6 md:p-8 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stats-icon mb-2">
+                        <svg class="w-6 h-6 md:w-8 md:h-8 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-lg md:text-xl font-semibold mb-2 text-dark-primary">ROI Optimization</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Maximize your advertising budget with smart spending strategies</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 md:mt-12">
+                <a href="contact.html" class="holographic-button primary-button px-8 md:px-12 py-3 md:py-4 rounded-full inline-block">
+                    <span>Launch Your Campaign</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-10 md:py-16 bg-gradient-to-r from-[#000B3E] to-[#1E3A8A] relative overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-0 left-0 w-48 h-48 md:w-72 md:h-72 bg-brand-purple rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+            <div class="absolute bottom-0 right-0 w-48 h-48 md:w-72 md:h-72 bg-brand-purple rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style="animation-delay:2s"></div>
+        </div>
+
+        <div class="container mx-auto px-4 md:px-6 text-center relative z-10">
+            <h2 class="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">Ready to Transform Your Digital Strategy?</h2>
+            <p class="text-lg md:text-xl text-gray-300 mb-6 max-w-2xl mx-auto">Let's discuss how our services can drive real results for your business.</p>
+
+            <div class="cta-actions">
+                <a href="contact.html" class="holographic-button primary-button px-6 md:px-12 py-3 md:py-4 rounded-full inline-block">
+                    <span>Get Started Today</span>
+                </a>
+                <a href="index.html" class="holographic-button secondary-button px-6 md:px-12 py-3 md:py-4 rounded-full inline-block">
+                    <span>Back to Home</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-primary py-8 md:py-12 border-t border-white/10">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="mb-2 md:mb-0 text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start">
+                        <img src="assets/images/logo.png" alt="Pictoishmi Logo" class="h-8 md:h-12 mr-3">
+                    </div>
+                    <p class="text-gray-400 mt-1 text-xs">Helping businesses grow digitally</p>
+                </div>
+
+                <div class="flex space-x-4">
+                    <a href="#" aria-label="Follow us on LinkedIn" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="assets/images/Linkdin-white.png" alt="LinkedIn">
+                    </a>
+                    <a href="#" aria-label="Follow us on Facebook" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="assets/images/facebook-white.png" alt="Facebook">
+                    </a>
+                    <a href="#" aria-label="Follow us on Instagram" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="assets/images/IG-white.png" alt="Instagram">
+                    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-6 md:mt-8 pt-6 md:pt-8">
+                <div class="flex flex-wrap justify-center gap-3 mb-4 text-xs md:text-sm">
+                    <a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="cookie-policy.html" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a>
+                    <a href="terms-of-service.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                </div>
+                <div class="text-center text-gray-500 text-sm md:text-base">
+                    <p>&copy; 2025 Pictoishmi. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 700,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 60,
+            disable: function() { return window.innerWidth < 640; } // reduce on tiny screens
+        });
+
+        // Mobile menu behavior (improved)
+        (function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navContainer = document.getElementById('nav-container');
+
+            if (!mobileMenuButton) return;
+
+            mobileMenuButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isHidden = mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', String(isHidden));
+            });
+
+            // close when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Navbar scroll effect
+            function updateNavbar() {
+                if (window.scrollY > 10) {
+                    navContainer.style.background = 'rgba(0, 11, 62, 0.95)';
+                    navContainer.style.backdropFilter = 'blur(20px)';
+                } else {
+                    navContainer.style.background = 'rgba(255, 255, 255, 0.1)';
+                    navContainer.style.backdropFilter = 'blur(16px)';
+                }
+            }
+
+            window.addEventListener('scroll', updateNavbar);
+            updateNavbar(); // Call once to set initial state
+
+            // close on resize to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    if (mobileMenu) mobileMenu.classList.add('hidden');
+                    if (mobileMenuButton) mobileMenuButton.setAttribute('aria-expanded', 'false');
+                }
+                // recreate particles when resizing for correct sizes
+                createParticles();
+            });
+        })();
+        
+
+        // Particles with mobile-friendly count
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            if (!container) return;
+            container.innerHTML = '';
+            const width = window.innerWidth;
+            const particleCount = width < 640 ? 6 : (width < 1024 ? 10 : 15);
+
+            for (let i = 0; i < particleCount; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                const size = (width < 640) ? (Math.random() * 60 + 30) : (Math.random() * 120 + 60);
+                p.style.width = p.style.height = `${size}px`;
+                p.style.left = `${Math.random() * 100}%`;
+                p.style.top = `${Math.random() * 100}%`;
+                p.style.opacity = (width < 640) ? 0.06 : 0.12;
+                p.style.animationDuration = `${Math.random() * 20 + 12}s`;
+                p.style.animationDelay = `${Math.random() * 5}s`;
+                container.appendChild(p);
+            }
+        }
+
+        // Animate progress bars when visible
+        function animateProgressBars() {
+            const bars = document.querySelectorAll('.progress-fill');
+            bars.forEach(bar => {
+                const target = bar.getAttribute('style') || '';
+                const match = target.match(/width:\s*([0-9]+)%/i);
+                const width = match ? match[1] + '%' : '80%';
+                bar.style.width = '0%';
+                setTimeout(() => { bar.style.width = width; }, 300);
+            });
+        }
+
+        // IntersectionObserver for progress animation
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+
+            // progress bars observer
+            const progObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateProgressBars();
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.25 });
+
+            const socialSection = document.getElementById('social-media');
+            if (socialSection) progObserver.observe(socialSection);
+        });
+    </script>
+</body>
+</html>

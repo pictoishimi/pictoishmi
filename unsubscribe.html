@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsubscribe - Pictoishmi</title>
+    <link rel="icon" type="image/x-icon" style="border-radius: 60%;" href="assets/images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'dark-primary': '#000B3E',
+                        'brand-purple': '#c47bd9',
+                        'brand-purple-dark': '#b065c6',
+                        'light-bg': '#f8f9fa',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { 
+            background-color: #000b3e; 
+            font-family: 'Inter', sans-serif; 
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', 'sans-serif'; }
+      
+
+        /* nav / buttons / cards (kept original look) */
+        nav { transition: all 0.25s ease; }
+        .nav-link { color: white; transition: color 0.2s ease; font-weight: 500; text-decoration: none; }
+        .nav-link:hover { color: rgba(255,255,255,0.85); }
+        .nav-link.active { color: var(--brand-purple) !important; font-weight: 600; }
+
+        /* Holographic Button Styles */
+        .holographic-button {
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .holographic-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: #b065c6;
+        }
+        .holographic-button > * { position: relative; z-index: 2; }
+        .holographic-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .holographic-button:hover::after { opacity: 1; }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        .primary-button {
+            background: #c47bd9;
+            color: white;
+            font-weight: 600;
+        }
+        .primary-button:hover {
+            background: #b065c6;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(196, 123, 217, 0.4);
+        }
+
+        /* Floating Animations */
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #c47bd9, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glass Morphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(196, 123, 217, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Particle Background */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(196, 123, 217, 0.1);
+            border-radius: 50%;
+            animation: float-particle 15s infinite linear;
+        }
+
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        /* Success/Error Messages */
+        .success-message {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #4ade80;
+        }
+        
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+        }
+    </style>
+</head>
+<body class="font-sans bg-dark-primary min-h-screen">
+       <!-- ===== NAVIGATION ===== -->
+        <nav class="fixed w-full z-50 px-4 pt-4">
+        <div id="nav-container" class="backdrop-blur-lg bg-white/10 rounded-[50px] mx-2 sm:mx-4 transition-all duration-300">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <a href="index.html" class="flex items-center">
+                            <img src="assets/images/logo.png" alt="Pictoishmi Logo" class="h-6 sm:h-8">
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center justify-center flex-1">
+                        <div class="flex gap-8 lg:gap-12">
+                            <a href="#home" class="nav-link text-sm lg:text-base">Home</a>
+                            <a href="about.html" class="nav-link text-sm lg:text-base">About us</a>
+                            <a href="services.html" class="nav-link text-sm lg:text-base">Services</a>
+                            <a href="blog.html" class="nav-link text-sm lg:text-base">Blog</a>
+                        </div>
+                    </div>
+                    <div class="hidden md:block">
+                        <a href="contact.html" class="bg-white text-[#000B3E] px-6 py-2 lg:px-8 lg:py-2 rounded-full hover:bg-gray-100 transition-colors font-medium text-sm lg:text-base">
+                            Book a Free Call
+                        </a>
+                    </div>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-white p-2" aria-label="Toggle mobile menu">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed w-full bg-[#000B3E] shadow-md z-40 top-16 rounded-b-2xl">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex flex-col space-y-3">
+                <a href="index.html" class="text-white active hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Home</a>
+                <a href="about.html" class="text-white hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">About us</a>
+                <a href="services.html" class="text-white hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Services</a>
+                <a href="blog.html" class="text-white hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Blog</a>
+                <a href="contact.html" class="bg-white text-[#000B3E] px-6 py-3 rounded-full hover:bg-gray-100 transition-colors inline-block text-center font-medium mt-2 text-base">
+                    Book a Free Call
+                </a>
+            </div>
+        </div>
+    </div>
+ 
+
+    <div class="particles-container" id="particles-container"></div>
+
+    <!-- Unsubscribe Section -->
+    <section class="pt-32 pb-20 relative overflow-hidden min-h-screen flex items-center">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#000B3E] to-[#1E3A8A]"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-4">
+                        Unsubscribe
+                    </h1>
+                    <p class="text-gray-300 text-lg">
+                        We're sorry to see you go. Please enter your email address to unsubscribe from our newsletter.
+                    </p>
+                </div>
+                
+                <div class="glass-card rounded-3xl p-8" data-aos="fade-up" data-aos-delay="100">
+                    <form id="unsubscribeForm" class="space-y-6">
+                        <div>
+                            <label for="email" class="block text-white font-medium mb-2">Email Address</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email"
+                                placeholder="Enter your email address" 
+                                class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-brand-purple transition-colors duration-300"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input 
+                                type="checkbox" 
+                                id="confirmUnsubscribe" 
+                                name="confirmUnsubscribe"
+                                class="w-4 h-4 text-brand-purple bg-white/10 border-white/20 rounded focus:ring-brand-purple focus:ring-2"
+                                required
+                            >
+                            <label for="confirmUnsubscribe" class="ml-2 text-gray-300 text-sm">
+                                I confirm that I want to unsubscribe from Pictoishmi newsletter
+                            </label>
+                        </div>
+                        
+                        <button 
+                            type="submit" 
+                            class="w-full holographic-button primary-button py-4 rounded-xl font-semibold transition-all duration-300"
+                        >
+                            Unsubscribe
+                        </button>
+                    </form>
+                    
+                    <div id="messageContainer" class="mt-6 hidden">
+                        <!-- Success/Error messages will appear here -->
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-white/10">
+                        <p class="text-gray-400 text-center">
+                            Changed your mind? 
+                            <a href="blog.html" class="text-brand-purple hover:underline font-medium">Resubscribe to our newsletter</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <p class="text-gray-400">
+                        Having trouble unsubscribing? 
+                        <a href="mailto:info@pictoishmi.com" class="text-brand-purple hover:underline">Contact our support team</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-primary py-8 md:py-12 border-t border-white/10">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="mb-2 md:mb-0 text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start">
+                        <img src="assets/images/logo.png" alt="Pictoishmi Logo" class="h-8 md:h-12 mr-3">
+                    </div>
+                    <p class="text-gray-400 mt-1 text-xs">Helping businesses grow digitally</p>
+                </div>
+
+                <div class="flex space-x-4">
+                    <a href="#" aria-label="Follow us on LinkedIn" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="assets/images/Linkdin-white.png" alt="LinkedIn">
+                    </a>
+                    <a href="#" aria-label="Follow us on Facebook" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="assets/images/facebook-white.png" alt="Facebook">
+                    </a>
+                    <a href="#" aria-label="Follow us on Instagram" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="assets/images/IG-white.png" alt="Instagram">
+                    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-6 md:mt-8 pt-6 md:pt-8">
+                <div class="flex flex-wrap justify-center gap-3 mb-4 text-xs md:text-sm">
+                    <a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="cookie-policy.html" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a>
+                    <a href="terms-of-service.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                </div>
+                <div class="text-center text-gray-500 text-sm md:text-base">
+                    <p>&copy; 2025 Pictoishmi. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50,
+        });
+
+        
+        // Mobile menu behavior (improved)
+        (function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navContainer = document.getElementById('nav-container');
+
+            if (!mobileMenuButton) return;
+
+            mobileMenuButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isHidden = mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', String(isHidden));
+            });
+
+            // close when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Navbar scroll effect
+            function updateNavbar() {
+                if (window.scrollY > 10) {
+                    navContainer.style.background = 'rgba(0, 11, 62, 0.95)';
+                    navContainer.style.backdropFilter = 'blur(20px)';
+                } else {
+                    navContainer.style.background = 'rgba(255, 255, 255, 0.1)';
+                    navContainer.style.backdropFilter = 'blur(16px)';
+                }
+            }
+
+            window.addEventListener('scroll', updateNavbar);
+            updateNavbar(); // Call once to set initial state
+
+            // close on resize to desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    if (mobileMenu) mobileMenu.classList.add('hidden');
+                    if (mobileMenuButton) mobileMenuButton.setAttribute('aria-expanded', 'false');
+                }
+                // recreate particles when resizing for correct sizes
+                createParticles();
+            });
+        })();
+
+        // Create floating particles
+        function createParticles() {
+            // ... (Your existing createParticles function is fine) ...
+        }
+
+        // Unsubscribe form handling
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            const unsubscribeForm = document.getElementById('unsubscribeForm');
+            const messageContainer = document.getElementById('messageContainer');
+            
+            // !!! IMPORTANT: Paste your new Apps Script URL here
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzr65iEE22siPaGJG8qeouOa9rHQVDa87oXstnuAHp5YxiQQwy1t3foxI_GnMHP3B4/exec"; // <-- YOUR URL HERE
+
+            unsubscribeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const confirmUnsubscribe = document.getElementById('confirmUnsubscribe').checked;
+                
+                if (!email || !confirmUnsubscribe) {
+                    showMessage('Please fill in all required fields.', 'error');
+                    return;
+                }
+                
+                if (SCRIPT_URL.includes("YOUR_GOOGLE_APPS_SCRIPT_URL_HERE")) {
+                    showMessage('DeveloperError: SCRIPT_URL is not set.', 'error');
+                    return;
+                }
+                
+                const submitButton = unsubscribeForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+                submitButton.textContent = 'Processing...';
+                submitButton.disabled = true;
+                
+                // Prepare data for Google Apps Script
+                const data = {
+                    action: "unsubscribe", // <-- This is the new action
+                    email: email
+                };
+                
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === "success") {
+                        showMessage(result.message, 'success');
+                        unsubscribeForm.reset();
+                    } else {
+                        throw new Error(result.message || 'An unknown error occurred.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showMessage(`Error: ${error.message}`, 'error');
+                })
+                .finally(() => {
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                });
+            });
+            
+            function showMessage(message, type) {
+                messageContainer.className = 'mt-6 p-4 rounded-xl ' + 
+                    (type === 'success' ? 'success-message' : 'error-message');
+                messageContainer.innerHTML = `<div class="flex items-center"><span class="mr-2">${type === 'success' ? '✅' : '❌'}</span><span>${message}</span></div>`;
+                messageContainer.classList.remove('hidden');
+                messageContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+    </script>
+</body>
+</html>
+</body>
+</html>

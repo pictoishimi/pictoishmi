@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Pictoishmi</title>
+    <link rel="icon" type="image/x-icon" style="border-radius: 60%;" href="assets/images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'dark-primary': '#000B3E',
+                        'brand-purple': '#c47bd9',
+                        'brand-purple-dark': '#b065c6',
+                        'light-bg': '#f8f9fa',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { 
+            background-color: #000b3e; 
+            font-family: 'Inter', sans-serif; 
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', 'sans-serif'; }
+        .nav-link.active {
+            color: #c47bd9 !important;
+            font-weight: 600;
+        }
+
+        /* Holographic Button Styles */
+        .holographic-button {
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .holographic-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: #b065c6;
+        }
+        .holographic-button > * { position: relative; z-index: 2; }
+        .holographic-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .holographic-button:hover::after { opacity: 1; }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        .primary-button {
+            background: #c47bd9;
+            color: white;
+            font-weight: 600;
+        }
+        .primary-button:hover {
+            background: #b065c6;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(196, 123, 217, 0.4);
+        }
+
+        /* Floating Animations */
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #c47bd9, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glass Morphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(196, 123, 217, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Particle Background */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(196, 123, 217, 0.1);
+            border-radius: 50%;
+            animation: float-particle 15s infinite linear;
+        }
+
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        /* Blog Specific Styles */
+        .blog-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .blog-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(196, 123, 217, 0.4);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+        .blog-tag {
+            background: linear-gradient(135deg, #c47bd9, #667eea);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .read-more-btn {
+            background: transparent;
+            border: 2px solid #c47bd9;
+            color: #c47bd9;
+            transition: all 0.3s ease;
+        }
+        .read-more-btn:hover {
+            background: #c47bd9;
+            color: white;
+            transform: translateY(-2px);
+        }
+        .featured-blog {
+            border: 2px solid rgba(196, 123, 217, 0.3);
+            background: linear-gradient(135deg, rgba(196, 123, 217, 0.1), rgba(102, 126, 234, 0.1));
+        }
+    </style>
+</head>
+<body class="font-sans bg-dark-primary min-h-screen">
+    <nav class="fixed w-full z-50 px-4 pt-4">
+        <div id="nav-container" class="backdrop-blur-lg bg-white/10 rounded-[50px] mx-4 transition-all duration-300">
+            <div class="container mx-auto px-8 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <img href="#home" src="assets\images\logo.png" alt="Pictoishmi Logo" class="h-8">
+                    </div>
+                    <div class="hidden md:flex items-center text-white justify-center flex-1">
+                        <div class="flex gap-12">
+                            <a href="index.html" class="nav-link ">Home</a>
+                            <a href="about.html" class="nav-link">About us</a>
+                            <a href="services.html" class="nav-link ">Services</a>
+                            <a href="blog.html" class="nav-link active">Blog</a>
+                        
+                        </div>
+                    </div>
+                    <div class="hidden md:block">
+                        <a href="contact.html" class="bg-white text-[#000B3E] px-8 py-2 rounded-full hover:bg-gray-100 transition-colors font-medium">
+                            Book a Free Call
+                        </a>
+                    </div>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-white p-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed w-full bg-[#000B3E] shadow-md z-40 top-20 rounded-b-2xl">
+        <div class="container mx-auto px-6 py-6">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="text-white active hover:text-gray-200 transition-colors py-2 text-lg">Home</a>
+                <a href="about.html" class="text-white hover:text-gray-200 transition-colors py-2 text-lg">About us</a>
+                <a href="services.html" class="text-white hover:text-gray-200 transition-colors py-2 text-lg">Services</a>
+                <a href="blog.html" class="text-white hover:text-gray-200 transition-colors py-2 text-lg">Blog</a>
+                <!-- <a href="contact.html" class="text-white hover:text-gray-200 transition-colors py-2 text-lg">Contact us</a> -->
+                <a href="contact.html" class="bg-white text-[#000B3E] px-6 py-3 rounded-full hover:bg-gray-100 transition-colors inline-block text-center font-medium mt-4">
+                    Book a Free Call
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="particles-container" id="particles-container"></div>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#000B3E] to-[#1E3A8A]"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <h1 class="font-heading text-5xl md:text-7xl font-bold text-white mb-6" data-aos="fade-up">
+                    Our <span class="gradient-text">Blog</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="100">
+                    Insights, strategies, and trends in digital marketing and business growth.
+                </p>
+                <div class="floating-element" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="inline-block p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                        <span class="text-white text-lg">📚 Latest industry insights and tips</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Blog Post -->
+    <section class="py-12 relative ">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-white text-center mb-12" data-aos="fade-up">
+                    Featured <span class="gradient-text">Article</span>
+                </h2>
+                
+                <div class="glass-card rounded-3xl p-8 featured-blog" data-aos="fade-up">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <div class="flex gap-3 mb-4">
+                                <span class="blog-tag">Digital Strategy</span>
+                                <span class="blog-tag">Trending</span>
+                            </div>
+                            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mb-4">
+                                The Future of Social Media Marketing in 2026
+                            </h3>
+                            <p class="text-gray-300 mb-6 text-lg">
+                                Discover how AI, video content, and community building are reshaping social media marketing strategies for businesses of all sizes.
+                            </p>
+                            <div class="flex items-center text-gray-400 mb-6">
+                                <span class="mr-4">📅 October 28, 2025</span>
+                                <span>⏱️ 8 min read</span>
+                            </div>
+                            
+                                <a  class="read-more-btn px-6 py-3 rounded-xl font-semibold transition-all duration-300" href="blog/future-social-media-marketing-2026-uk.html">Read Full Article</a>
+                            
+                        </div>
+                        <div class="relative">
+                            <div class="aspect-video rounded-2xl bg-gradient-to-br from-brand-purple to-blue-600 flex items-center justify-center">
+                                <img src="assets/images/future-of-social-media.png" alt="The Future of Social Media Marketing" class="w-full h-full object-cover rounded-2xl">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-20 relative ">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-white text-center mb-4" data-aos="fade-up">
+                    Latest <span class="gradient-text">Articles</span>
+                </h2>
+                <p class="text-gray-300 text-center mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Explore our collection of articles covering digital marketing, branding, and business growth strategies.
+                </p>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up" data-aos-delay="200">
+                    <button class="blog-tag bg-brand-purple">All Topics</button>
+                    <button class="blog-tag bg-gray-600 hover:bg-brand-purple transition-colors">Social Media</button>
+                    <button class="blog-tag bg-gray-600 hover:bg-brand-purple transition-colors">Content Strategy</button>
+                    <button class="blog-tag bg-gray-600 hover:bg-brand-purple transition-colors">Branding</button>
+                    <button class="blog-tag bg-gray-600 hover:bg-brand-purple transition-colors">Advertising</button>
+                    <button class="blog-tag bg-gray-600 hover:bg-brand-purple transition-colors">Analytics</button>
+                </div>
+
+                <!-- Blog Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Blog Post 1 -->
+                    <div class="glass-card rounded-2xl p-6 blog-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="aspect-video rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 mb-4 flex items-center justify-center">
+                             <img src="assets/images/contetn-strategy-socail-contentss.png" alt=" 5 Content Creation Strategies That Actually Work" class="w-full h-full object-cover rounded-xl">
+                        </div>
+                        <div class="flex gap-2 mb-3">
+                            <span class="blog-tag">Content Strategy</span>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-white mb-3">
+                            5 Content Creation Strategies That Actually Work
+                        </h3>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Learn proven content strategies that drive engagement and conversions for your business.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">📅 Nov 7, 2024</span>
+                        
+                                <a class="read-more-btn px-6 py-3 rounded-xl font-semibold transition-all duration-300" href="blog/content-creation-strategies-that-work-uk.html">Read More</a>
+                            
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 2 -->
+                    <div class="glass-card rounded-2xl p-6 blog-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="aspect-video rounded-xl bg-gradient-to-br from-blue-500 to-teal-500 mb-4 flex items-center justify-center">
+                            <img src="assets/images/brand-identiyi-social-media-brand.png" alt="Building a Memorable Brand Identity" class="w-full h-full object-cover rounded-xl">
+                        </div>
+                        <div class="flex gap-2 mb-3">
+                            <span class="blog-tag">Branding</span>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-white mb-3">
+                            Building a Memorable Brand Identity
+                        </h3>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Essential steps to create a brand that resonates with your target audience and stands out.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">📅 Nov 4, 2025</span>
+                            
+                                <a class="read-more-btn px-6 py-3 rounded-xl font-semibold transition-all duration-300" href="blog/memorable-social-media-brand-identity-uk.html">Read More</a>
+                            
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 3 -->
+                    <div class="glass-card rounded-2xl p-6 blog-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="aspect-video rounded-xl bg-gradient-to-br from-green-500 to-blue-500 mb-4 flex items-center justify-center">
+                            <img src="assets/images/Maximizing ROI with Digital Advertising.png" alt="Maximizing ROI with Digital Advertising" class="w-full h-full object-cover rounded-xl">
+                        </div>
+                        <div class="flex gap-2 mb-3">
+                            <span class="blog-tag">Advertising</span>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-white mb-3">
+                            Maximizing ROI with Digital Advertising
+                        </h3>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Advanced strategies to optimize your ad spend and achieve better results from your campaigns.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">📅 Oct 25, 2025</span>
+                            
+                                <a class="read-more-btn px-6 py-3 rounded-xl font-semibold transition-all duration-300" href="blog/digital-advertising-roi-uk-small-business.html">Read More</a>
+                           
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 4 -->
+                    <div class="glass-card rounded-2xl p-6 blog-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="aspect-video rounded-xl bg-gradient-to-br from-orange-500 to-red-500 mb-4 flex items-center justify-center">
+                            <img src="assets/images/instagram-reeel-size-guide.png" alt="Instagram Reels: The Complete Guide" class="w-full h-full object-cover rounded-xl">
+                        </div>
+                        <div class="flex gap-2 mb-3">
+                            <span class="blog-tag">Social Media</span>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-white mb-3">
+                            Instagram Reels: The Complete Guide
+                        </h3>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Everything you need to know about creating engaging Reels that boost your reach and engagement.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">📅 Oct 13, 2025</span>
+                            
+                                <a class="read-more-btn px-6 py-3 rounded-xl font-semibold transition-all duration-300" href="blog/instagram-reels-guide-uk-business.html">Read More</a>
+                           
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 5 -->
+                    <div class="glass-card rounded-2xl p-6 blog-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="aspect-video rounded-xl bg-gradient-to-br from-purple-600 to-blue-600 mb-4 flex items-center justify-center">
+                            <img src="assets/images/Data-Driven Decision Making for Marketers.png" alt=" Data-Driven Decision Making for Marketers" class="w-full h-full object-cover rounded-xl">
+                        </div>
+                        <div class="flex gap-2 mb-3">
+                            <span class="blog-tag">Analytics</span>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-white mb-3">
+                            Data-Driven Decision Making for Marketers
+                        </h3>
+                        <p class="text-gray-300 text-sm mb-4">
+                            How to leverage analytics to make informed marketing decisions and drive business growth.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">📅 Aug 29, 2025</span>
+                            
+                                <a class="read-more-btn px-6 py-3 rounded-xl font-semibold transition-all duration-300" href="blog/data-driven-marketing-guide-uk-smes.html">Read More</a>
+                            
+                        </div>
+                    </div>
+
+                    <!-- Blog Post 6 -->
+                    <div class="glass-card rounded-2xl p-6 blog-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="aspect-video rounded-xl bg-gradient-to-br from-teal-500 to-green-500 mb-4 flex items-center justify-center">
+                            <img src="assets/images/contecreateblog.jpg" alt="Creating a 90-Day Marketing Plan" class="w-full h-full object-cover rounded-xl">
+                        </div>
+                        <div class="flex gap-2 mb-3">
+                            <span class="blog-tag">Strategy</span>
+                        </div>
+                        <h3 class="font-heading text-xl font-bold text-white mb-3">
+                            Creating a 90-Day Marketing Plan
+                        </h3>
+                        <p class="text-gray-300 text-sm mb-4">
+                            Step-by-step guide to building an effective marketing plan that delivers measurable results.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400 text-sm">📅 Aug 24, 2025</span>
+                            
+                               <a class="read-more-btn px-6 py-3 rounded-xl font-semibold transition-all duration-300" href="blog/90-day-marketing-plan-guide-uk-smes.html">Read More</a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="text-center mt-12" data-aos="fade-up">
+                    <button class="holographic-button primary-button px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+                        Load More Articles
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-20 bg-gradient-to-b from-dark-primary to-[#1E3A8A]">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-white mb-4" data-aos="fade-up">
+                    Stay <span class="gradient-text">Updated</span>
+                </h2>
+                <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Get the latest digital marketing insights and strategies delivered directly to your inbox.
+                </p>
+                <div class="glass-card rounded-2xl p-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                    <form id="subscribeForm"   class="flex flex-col sm:flex-row gap-4">
+                        <input 
+                            type="email" 
+                            placeholder="Enter your email address" 
+                            class="flex-1 modern-input text-black rounded-xl px-4 py-4 focus:outline-none transition-all duration-300"
+                            required
+                        >
+                        <button type="submit" class="holographic-button primary-button px-8 py-4 rounded-xl font-semibold whitespace-nowrap">
+                            Subscribe Now
+                        </button>
+                    </form>
+                    <p class="text-gray-400 text-sm mt-4">
+                        No spam, <a href="unsubscribe.html" class="text-brand-purple hover:underline">unsubscribe</a> at any time. We respect your privacy.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-primary py-8 md:py-12 border-t border-white/10">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="mb-2 md:mb-0 text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start">
+                        <img src="assets/images/logo.png" alt="Pictoishmi Logo" class="h-8 md:h-12 mr-3">
+                    </div>
+                    <p class="text-gray-400 mt-1 text-xs">Helping businesses grow digitally</p>
+                </div>
+
+                <div class="flex space-x-4">
+                    <a href="#" aria-label="Follow us on LinkedIn" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="assets/images/Linkdin-white.png" alt="LinkedIn">
+                    </a>
+                    <a href="#" aria-label="Follow us on Facebook" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="assets/images/facebook-white.png" alt="Facebook">
+                    </a>
+                    <a href="#" aria-label="Follow us on Instagram" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="assets/images/IG-white.png" alt="Instagram">
+                    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-6 md:mt-8 pt-6 md:pt-8">
+                <div class="flex flex-wrap justify-center gap-3 mb-4 text-xs md:text-sm">
+                    <a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="cookie-policy.html" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a>
+                    <a href="terms-of-service.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                </div>
+                <div class="text-center text-gray-500 text-sm md:text-base">
+                    <p>&copy; 2025 Pictoishmi. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50,
+        });
+
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navContainer = document.getElementById('nav-container');
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+
+            // Navbar scroll effect
+            function updateNavbar() {
+                if (window.scrollY > 10) {
+                    navContainer.style.background = 'rgba(0, 11, 62, 0.95)';
+                    navContainer.style.backdropFilter = 'blur(20px)';
+                } else {
+                    navContainer.style.background = 'rgba(255, 255, 255, 0.1)';
+                    navContainer.style.backdropFilter = 'blur(16px)';
+                }
+            }
+
+            window.addEventListener('scroll', updateNavbar);
+            updateNavbar(); // Call once to set initial state
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            if (!container) return;
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 100 + 50;
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 20 + 10;
+                const animationDelay = Math.random() * 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}%`;
+                particle.style.animationDuration = `${animationDuration}s`;
+                particle.style.animationDelay = `${animationDelay}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Category filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            const filterButtons = document.querySelectorAll('.blog-tag');
+            const blogCards = document.querySelectorAll('.blog-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('bg-brand-purple'));
+                    filterButtons.forEach(btn => btn.classList.add('bg-gray-600'));
+                    
+                    // Add active class to clicked button
+                    this.classList.remove('bg-gray-600');
+                    this.classList.add('bg-brand-purple');
+                    
+                    // Here you would typically filter the blog posts
+                    // For now, we'll just show a simple animation
+                    blogCards.forEach(card => {
+                        card.style.opacity = '0.5';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                        }, 300);
+                    });
+                });
+            });
+        });
+    </script>
+    <script>
+    // =========================================================================
+    // NEW: NEWSLETTER SUBSCRIBE SCRIPT
+    // =========================================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        const subscribeForm = document.getElementById('subscribeForm');
+        
+        // !!! IMPORTANT: Paste your Google Apps Script URL here
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzr65iEE22siPaGJG8qeouOa9rHQVDa87oXstnuAHp5YxiQQwy1t3foxI_GnMHP3B4/exec"; // <-- YOUR SAME BOOKING SCRIPT URL
+
+        if (subscribeForm) {
+            // Create message element if it doesn't exist
+            let messageEl = document.getElementById('subscribe-message');
+            if (!messageEl) {
+                messageEl = document.createElement('p');
+                messageEl.id = 'subscribe-message';
+                messageEl.className = 'mt-4 text-sm';
+                subscribeForm.parentNode.insertBefore(messageEl, subscribeForm.nextSibling);
+            }
+
+            subscribeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const emailInput = this.querySelector('input[type="email"]');
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const email = emailInput.value.trim();
+                
+                if (!email) {
+                    messageEl.textContent = "Please enter your email address.";
+                    messageEl.style.color = "#f87171";
+                    return;
+                }
+                
+                if (SCRIPT_URL.includes("YOUR_WEB_APP_URL") || SCRIPT_URL.includes("AKfy...")) {
+                    messageEl.textContent = "Newsletter subscription is being configured. Please try again later.";
+                    messageEl.style.color = "#f87171";
+                    return;
+                }
+                
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.textContent = 'Subscribing...';
+                submitBtn.disabled = true;
+                messageEl.textContent = '';
+
+                const data = {
+                    action: "subscribe",
+                    email: email
+                };
+
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === "success" || result.status === "info") {
+                        messageEl.textContent = result.message;
+                        messageEl.style.color = "#4ade80"; // Green for success
+                        emailInput.value = ''; // Clear input
+                    } else {
+                        throw new Error(result.message || 'An unknown error occurred.');
+                    }
+                })
+                .catch(error => {
+                    messageEl.textContent = `Error: ${error.message}`;
+                    messageEl.style.color = "#f87171"; // Red for error
+                })
+                .finally(() => {
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+            });
+        }
+    });
+</script>
+</body>
+</html>
+</body>
+</html>
