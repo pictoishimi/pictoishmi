@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>boulvard Furniture - Conceptual Social Media Rebrand | Pictoishmi</title>
+    <link rel="icon" type="image/x-icon" style="border-radius: 60%;" href="../../assets/images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'dark-primary': '#000B3E',
+                        'brand-purple': '#c47bd9',
+                        'brand-purple-dark': '#b065c6',
+                        'light-bg': '#f8f9fa',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ===== BASE STYLES ===== */
+        html { 
+            scroll-behavior: smooth; 
+        }
+        
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* body {
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            background-color: #000B3E; 
+            font-family: 'Inter', sans-serif; 
+        } */
+        
+        h1, h2, h3, h4, h5, h6 { 
+            font-family: 'Montserrat', 'sans-serif'; 
+        }
+
+        /* ===== NAVIGATION STYLES ===== */
+        nav { 
+            transition: all 0.3s ease; 
+        }
+        
+        .nav-link { 
+            color: white; 
+            transition: color 0.3s ease; 
+            font-weight: 500; 
+        }
+        
+        .nav-link:hover { 
+            color: rgba(255, 255, 255, 0.8); 
+        }
+        
+        .nav-link.active {
+            color: #c47bd9 !important;
+            font-weight: 600;
+        }
+
+        /* ===== BUTTON STYLES ===== */
+        .holographic-button {
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .holographic-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .holographic-button:hover::after { 
+            opacity: 1; 
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        
+        .primary-button {
+            background: #c47bd9;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .primary-button:hover {
+            background: #b065c6;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(196, 123, 217, 0.4);
+        }
+        
+        .secondary-button {
+            background: transparent;
+            color: white;
+            border: 2px solid #c47bd9;
+        }
+        
+        .secondary-button:hover {
+            background: rgba(196, 123, 217, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(196, 123, 217, 0.1);
+            border-color: #b065c6;
+        }
+
+        /* ===== TEXT STYLES ===== */
+        .gradient-text {
+            background: linear-gradient(135deg, #c47bd9, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== CARD STYLES ===== */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(196, 123, 217, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== PARTICLE BACKGROUND ===== */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(196, 123, 217, 0.1);
+            border-radius: 50%;
+            animation: float-particle 15s infinite linear;
+        }
+        
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        /* ===== PROJECT SHOWCASE STYLES ===== */
+        .project-hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .project-hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+        
+        .project-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0, 11, 62, 0.4), rgba(0, 11, 62, 0.7) 80%, #000B3E);
+            z-index: -1;
+        }
+        
+        .project-logo {
+            max-width: 300px;
+            height: auto;
+            margin-bottom: 2rem;
+        }
+        
+        .project-meta-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-meta-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-meta-value {
+            color: white;
+            font-size: 1.125rem;
+        }
+        
+        .project-tag {
+            display: inline-block;
+            background: rgba(196, 123, 217, 0.2);
+            color: #c47bd9;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ===== INSTAGRAM GRID STYLES ===== */
+        .instagram-grid {
+            display: grid;
+            gap: 4px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .grid-item {
+            position: relative;
+            overflow: hidden;
+            background-color: #000;
+        }
+        
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .grid-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .grid-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(196, 123, 217, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .grid-item:hover::after {
+            opacity: 1;
+        }
+
+        /* ===== LAZY LOAD VIDEO STYLES (NEW) ===== */
+        .reel-container {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: #0f172a; /* Placeholder bg color */
+        }
+        
+        .reel-container::before {
+            content: '';
+            display: block;
+            padding-top: 177.78%; /* 9:16 aspect ratio */
+        }
+        
+        .reel-container iframe,
+        .reel-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 16px;
+            z-index: 10;
+        }
+
+        /* The Facade (Play Button Overlay) */
+        .video-facade {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 5;
+            overflow: hidden; /* Keeps the zoomed image inside bounds */
+            background: linear-gradient(135deg, rgba(0, 11, 62, 1) 0%, rgba(25, 30, 80, 1) 100%);
+            transition: opacity 0.3s ease;
+        }
+
+        /* NEW: Video Thumbnail Styles */
+        .video-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1; /* Behind play icon */
+            opacity: 0.7; /* Make it slightly dark so play button pops */
+            transition: transform 0.5s ease;
+        }
+
+        /* Zoom effect on hover */
+        .video-facade:hover .video-thumbnail {
+            transform: scale(1.05);
+            opacity: 0.85;
+        }
+
+        .video-facade:hover .play-icon {
+            transform: scale(1.1);
+            background: #c47bd9;
+            box-shadow: 0 0 20px rgba(196, 123, 217, 0.6);
+        }
+
+        .play-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2; /* Above thumbnail */
+        }
+
+        .play-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+            margin-left: 4px; /* Optical adjustment */
+        }
+        
+        .reel-description {
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 12px 16px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            font-size: 0.875rem;
+            text-align: center;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            z-index: 20; /* Above iframe */
+            pointer-events: none; /* Let clicks pass through to controls */
+        }
+
+        /* ===== COMBINED SECTION STYLES ===== */
+        .combined-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .combined-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(196, 123, 217, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 11, 62, 0.05) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(196, 123, 217, 0.05);
+            border-radius: 50%;
+            animation: float-element 20s infinite linear;
+        }
+
+        .floating-element-1 {
+            width: 120px;
+            height: 120px;
+            top: 10%;
+            left: 5%;
+            animation-duration: 25s;
+        }
+
+        .floating-element-2 {
+            width: 80px;
+            height: 80px;
+            top: 70%;
+            right: 10%;
+            animation-duration: 30s;
+            animation-delay: 5s;
+        }
+
+        .floating-element-3 {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 15%;
+            animation-duration: 35s;
+            animation-delay: 10s;
+        }
+
+        @keyframes float-element {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            33% { transform: translateY(-20px) rotate(120deg) scale(1.1); }
+            66% { transform: translateY(10px) rotate(240deg) scale(0.9); }
+            100% { transform: translateY(0px) rotate(360deg) scale(1); }
+        }
+
+        .content-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(196, 123, 217, 0.1), rgba(102, 126, 234, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .content-card:hover::before {
+            opacity: 1;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== PROCESS STYLES ===== */
+        .process-step {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: 1.5rem;
+            top: 0;
+            bottom: -3rem;
+            width: 2px;
+            background: rgba(196, 123, 217, 0.3);
+        }
+
+        .process-step:last-child::before {
+            display: none;
+        }
+
+        .process-number {
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 3rem;
+            height: 3rem;
+            background: rgba(196, 123, 217, 0.2);
+            border: 2px solid rgba(196, 123, 217, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #c47bd9;
+           
+        }
+
+        /* ===== STRATEGY PILLARS ===== */
+        .strategy-pillar {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .pillar-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(196, 123, 217, 0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            border: 2px solid rgba(196, 123, 217, 0.3);
+        }
+
+        /* ===== RESPONSIVE UTILITIES ===== */
+        @media (max-width: 640px) {
+            .project-logo {
+                max-width: 200px;
+            }
+            
+            .project-hero {
+                min-height: 80vh;
+                padding-top: 100px;
+            }
+            
+            .project-hero .text-2xl,
+            .project-hero .text-3xl {
+                font-size: 1.5rem;
+            }
+            
+            .glass-card {
+                padding: 1.5rem;
+            }
+
+            .reel-container {
+                max-width: 280px;
+            }
+            
+            .instagram-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 3px;
+            }
+
+            .content-card {
+                padding: 1.5rem !important;
+            }
+
+            .floating-element {
+                display: none;
+            }
+
+            .process-step {
+                padding-left: 2.5rem;
+            }
+
+            .process-number {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+
+            .pillar-icon {
+                width: 60px;
+                height: 60px;
+            }
+        }
+        
+        @media (min-width: 641px) and (max-width: 768px) {
+            .project-logo {
+                max-width: 250px;
+            }
+            
+            .project-hero .text-2xl,
+            .project-hero .text-3xl {
+                font-size: 1.75rem;
+            }
+            
+            .instagram-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 4px;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .instagram-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 6px;
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            .instagram-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .project-hero .container {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+
+             .reel-container {
+                max-width: 300px;
+            }
+        
+        }
+
+        
+
+        /* ===== CONCEPTUAL BADGE ===== */
+        .conceptual-badge {
+            background: linear-gradient(135deg, #c47bd9, #c47bd9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            margin-top: 7rem;
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-dark-primary min-h-screen">
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 px-4 pt-4">
+        <div id="nav-container" class="backdrop-blur-lg bg-white/10 rounded-[50px] mx-2 sm:mx-4 transition-all duration-300">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <a href="../../index.html" class="flex items-center">
+                            <img src="../../assets/images/logo.png" alt="Pictoishmi Logo" class="h-6 sm:h-8">
+                        </a>
+                    </div>
+                    <div class="hidden md:flex items-center justify-center flex-1">
+                        <div class="flex gap-8 lg:gap-12">
+                            <a href="../../index.html" class="nav-link text-sm lg:text-base">Home</a>
+                            <a href="../../our-work.html" class="nav-link active text-sm lg:text-base">Work</a>
+                            <a href="../../about.html" class="nav-link text-sm lg:text-base">About us</a>
+                            <a href="../../services.html" class="nav-link text-sm lg:text-base">Services</a>
+                            
+                            <a href="../../blog.html" class="nav-link text-sm lg:text-base">Blog</a>
+                        </div>
+                    </div>
+                    <div class="hidden md:block">
+                        <a href="../../contact.html" class="bg-white text-[#000B3E] px-6 py-2 lg:px-8 lg:py-2 rounded-full hover:bg-gray-100 transition-colors font-medium text-sm lg:text-base">
+                            Book a Free Call
+                        </a>
+                    </div>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-white p-2" aria-label="Toggle mobile menu">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed w-full bg-[#000B3E] shadow-md z-40 top-16 rounded-b-2xl">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex flex-col space-y-3">
+                <a href="index.html" class="text-white hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Home</a>
+                <a href="about.html" class="text-white hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">About us</a>
+                <a href="services.html" class="text-white hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Services</a>
+                <a href="our-work.html" class="text-white active hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Work</a>
+                <a href="blog.html" class="text-white hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Blog</a>
+                <a href="contact.html" class="bg-white text-[#000B3E] px-6 py-3 rounded-full hover:bg-gray-100 transition-colors inline-block text-center font-medium mt-2 text-base">
+                    Book a Free Call
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="particles-container" id="particles-container"></div>
+
+    <!-- Hero Section -->
+    <section class="project-hero relative">
+        <img 
+            src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2158&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+            class="project-hero-image"
+            alt="Boulvard Furniture Store Interior"
+        >
+        <div class="project-hero-overlay"></div>
+        
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-8" data-aos="fade-up">
+                    <div class="conceptual-badge inline-flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                        </svg>
+                        Conceptual Project Showcase
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 items-center">
+                    <div class="lg:col-span-2">
+                        <!-- Project Logo -->
+                        <div class="project-logo mx-auto md:mx-0 text-center md:text-left" data-aos="fade-up">
+                            <img src="Boulvard logo2.png" alt="">
+                            <!-- <div class="text-white text-4xl md:text-5xl font-bold font-heading mb-2">Boulvard Furniture</div> -->
+                            <!-- <div class="text-xl text-gray-300">Artisan Furniture</div> -->
+                        </div>
+                        
+                        <!-- Project Description -->
+                        <div class="mb-8" data-aos="fade-up" data-aos-delay="100">
+                            <p class="text-xl md:text-2xl lg:text-xl text-white font-light text-center md:text-left">
+                                A conceptual social media rebrand showcasing our strategic approach to transforming traditional furniture retail through modern content design and brand storytelling.
+                            </p>
+                        </div>
+                        
+                        <!-- Project Tags -->
+                        <div class="text-center md:text-left" data-aos="fade-up" data-aos-delay="200">
+                            <span class="project-tag">Furniture Retail</span>
+                            <span class="project-tag">Strategy</span>
+                            <span class="project-tag">Content Creation</span>
+                            <span class="project-tag">Social Media</span>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-1 mt-8 md:mt-0" data-aos="fade-left">
+                        <!-- Project Metadata -->
+                        <div class="project-meta-item">
+                            <div class="project-meta-label">PROJECT TYPE</div>
+                            <div class="project-meta-value">Conceptual Showcase</div>
+                        </div>
+                        
+                        <div class="project-meta-item">
+                            <div class="project-meta-label">INDUSTRY</div>
+                            <div class="project-meta-value">Furniture & Home Decor</div>
+                        </div>
+                        
+                        <div class="project-meta-item">
+                            <div class="project-meta-label">PLATFORMS</div>
+                            <div class="project-meta-value">Instagram, Facebook</div>
+                        </div>
+                        
+                        <div class="project-meta-item">
+                            <div class="project-meta-label">TERRITORY</div>
+                            <div class="project-meta-value">United Kingdom</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategy Overview Section -->
+    <section class="py-16 md:py-20 combined-section">
+        <div class="floating-elements">
+            <div class="floating-element floating-element-1"></div>
+            <div class="floating-element floating-element-2"></div>
+            <div class="floating-element floating-element-3"></div>
+        </div>
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="max-w-7xl mx-auto">
+                <!-- Section Header -->
+                <div class="text-center mb-12 md:mb-16" data-aos="fade-up">
+                    <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+                        Strategic Approach
+                    </h2>
+                    <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                        How we would transform a traditional furniture business for the modern digital landscape
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <!-- Pillar 1 -->
+                    <div class="strategy-pillar" data-aos="fade-up" data-aos-delay="100">
+                        <div class="pillar-icon">
+                            <svg class="w-8 h-8 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Brand Elevation</h3>
+                        <p class="text-gray-300">Transition from traditional retailer to aspirational lifestyle brand through premium visual storytelling</p>
+                    </div>
+
+                    <!-- Pillar 2 -->
+                    <div class="strategy-pillar" data-aos="fade-up" data-aos-delay="200">
+                        <div class="pillar-icon">
+                            <svg class="w-8 h-8 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Content Ecosystem</h3>
+                        <p class="text-gray-300">Develop engaging content pillars around craftsmanship, sustainability, and home styling inspiration</p>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div class="strategy-pillar" data-aos="fade-up" data-aos-delay="300">
+                        <div class="pillar-icon">
+                            <svg class="w-8 h-8 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Community Building</h3>
+                        <p class="text-gray-300">Foster engaged community through interactive content and authentic brand storytelling</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-stretch">
+                    <!-- Challenge Side -->
+                    <div class="flex flex-col" data-aos="fade-right">
+                        <div class="content-card p-8 md:p-10 flex-1">
+                            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6 text-center md:text-left">The Opportunity</h3>
+                            <div class="text-gray-300 text-base md:text-lg space-y-6">
+                                <p class="text-center md:text-left">
+                                    Traditional furniture retailers often struggle to connect with younger audiences and compete in the digital space. This conceptual project demonstrates how we would address common industry challenges.
+                                </p>
+                                
+                                <div class="space-y-4">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 w-2 h-2 bg-brand-purple rounded-full mt-2 mr-3"></div>
+                                        <p class="text-gray-300">Outdated visual identity failing to showcase craftsmanship</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 w-2 h-2 bg-brand-purple rounded-full mt-2 mr-3"></div>
+                                        <p class="text-gray-300">Inconsistent brand messaging across platforms</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 w-2 h-2 bg-brand-purple rounded-full mt-2 mr-3"></div>
+                                        <p class="text-gray-300">Lack of engagement with modern home decor trends</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Solution Side -->
+                    <div class="flex flex-col" data-aos="fade-left">
+                        <div class="content-card p-8 md:p-10 flex-1">
+                            <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mb-6 text-center md:text-left">Our Approach</h3>
+                            <div class="space-y-6">
+                                <div class="space-y-4">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-brand-purple/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                            <span class="text-brand-purple font-bold">1</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white font-bold mb-1">Visual Transformation</h4>
+                                            <p class="text-gray-300 text-sm">Create cohesive visual language focusing on natural materials and lifestyle integration</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-brand-purple/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                            <span class="text-brand-purple font-bold">2</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white font-bold mb-1">Content Strategy</h4>
+                                            <p class="text-gray-300 text-sm">Develop content pillars around craftsmanship, sustainability, and home styling</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-brand-purple/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                                            <span class="text-brand-purple font-bold">3</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white font-bold mb-1">Community Engagement</h4>
+                                            <p class="text-gray-300 text-sm">Build engaged community through interactive content and authentic storytelling</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Content Section -->
+    <section class="py-16 md:py-20">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-12" data-aos="fade-up">
+                Content Design Showcase
+            </h2>
+            
+            <div class="instagram-grid">
+                <!-- Content Examples -->
+                <div class="grid-item" data-aos="zoom-in">
+                    <img 
+                        src="contents/g-milan-dark-chair.png"
+                        loading="lazy"
+                    >
+                </div>
+                
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="50">
+                    <img 
+                        src="contents/goole-review-testimonialimage.png"
+                        loading="lazy"
+                    >
+                </div>
+                
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img 
+                        src="contents/find-more-comfortabe-beds.png"
+                        loading="lazy"
+                    >
+                </div>
+                
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="150">
+                    <img 
+                        src="contents/brown-chair-image-.png"
+                        loading="lazy"
+                    >
+                </div>
+                
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img 
+                        src="contents/family-related-graphic.png"
+                        loading="lazy"
+                    >
+                </div>
+                
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="250">
+                    <img 
+                        src="contents/vintage-chair-image-brown.png"
+                        loading="lazy"
+                    >
+                </div>
+                
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="300">
+                    <img 
+                        src="contents/limited-offer-40.png"
+                        loading="lazy"
+                    >
+                </div>
+                
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="350">
+                    <img 
+                        src="contents/design-as-you-imagined.png"
+                        loading="lazy"
+                    >
+                </div>
+                
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="400">
+                    <img 
+                        src="contents/rounde-nesting-side-tables.png"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="400">
+                    <img 
+                        src="contents/modern-bst-deals-images.png"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="400">
+                    <img 
+                        src="contents/all-in-one-place-imagge.png"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="grid-item" data-aos="zoom-in" data-aos-delay="400">
+                    <img 
+                        src="contents/19.png"
+                        loading="lazy"
+                    >
+                </div>
+            </div>
+
+            
+        </div>
+    </section>
+
+    <!-- Video Showcase Section (OPTIMIZED: Click-to-Load with Custom Thumbnails) -->
+    <section class="py-16 md:py-20 bg-dark-primary/50">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-12" data-aos="fade-up">
+                Video Content Showcase
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <!-- Video 1 -->
+                <div data-aos="fade-up">
+                    <div class="reel-container" data-video-src="https://player.vimeo.com/video/1139550156?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1080" height="1920" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="boulevard reels-2">
+                        <!-- Facade with Thumbnail & Play Button -->
+                        <div class="video-facade">
+                            <!-- REPLACE src WITH YOUR IMAGE URL -->
+                            <img src="contents/boulevard reels-2-thumbnail.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                            
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                        <div class="reel-description">Air freshener Campaign</div>
+                    </div>
+                </div>
+                
+                <!-- Video 2 -->
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <div class="reel-container" data-video-src="https://player.vimeo.com/video/1139550221?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1080" height="1920" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="boulvard reel-3">
+                        <div class="video-facade">
+                            <!-- REPLACE src WITH YOUR IMAGE URL -->
+                            <img src="contents/boulvard reel-3-thumnail.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                            
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                        <div class="reel-description">Fabric Softener Story</div>
+                    </div>
+                </div>
+                
+                <!-- Video 3 -->
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <div class="reel-container" data-video-src="https://player.vimeo.com/video/1139550210?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1080" height="1920" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="boulevard reels-1">
+                        <div class="video-facade">
+                            <!-- REPLACE src WITH YOUR IMAGE URL -->
+                            <img src="contents/furniture-reel--thumbnail1.jpg" class="video-thumbnail" alt="Video Thumbnail">
+                            
+                            <div class="play-icon">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                        <div class="reel-description">Educational short reel</div>
+                    </div>
+                </div>
+                
+             
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-16 md:py-20 bg-dark-primary/50">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-12" data-aos="fade-up">
+                    Our Strategic Process
+                </h2>
+                
+                <div class="space-y-8">
+                    <!-- Step 1 -->
+                    <div class="process-step" data-aos="fade-up">
+                        <div class="process-number">1</div>
+                        <h3 class="font-heading text-xl md:text-2xl font-bold text-white mb-4">Discovery & Market Analysis</h3>
+                        <p class="text-gray-300 text-base md:text-lg">
+                             Comprehensive analysis of UK furniture retail landscape, target audience preferences, and competitor social media strategies. Identifying opportunities in sustainable, story-driven content.
+                        </p>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+                        <div class="process-number">2</div>
+                        <h3 class="font-heading text-xl md:text-2xl font-bold text-white mb-4">Brand Positioning Strategy</h3>
+                        <p class="text-gray-300 text-base md:text-lg">
+                            Developing brand pillars focusing on craftsmanship, sustainability, and lifestyle integration. Creating visual guidelines that emphasize natural materials and aspirational home styling.
+                        </p>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+                        <div class="process-number">3</div>
+                        <h3 class="font-heading text-xl md:text-2xl font-bold text-white mb-4">Content Strategy Development</h3>
+                        <p class="text-gray-300 text-base md:text-lg">
+                            Creating content pillars around craftsmanship stories, sustainable practices, home styling tips, and customer transformations. Planning consistent posting schedule across platforms.
+                        </p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+                        <div class="process-number">4</div>
+                        <h3 class="font-heading text-xl md:text-2xl font-bold text-white mb-4">Community Engagement Plan</h3>
+                        <p class="text-gray-300 text-base md:text-lg">
+                            Building engaged community through interactive content, user-generated features, and responsive communication. Establishing brand as authority in sustainable furniture space.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-20 bg-gradient-to-r from-[#000B3E] to-[#1E3A8A] relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-0 w-48 h-48 md:w-72 md:h-72 bg-brand-purple rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+            <div class="absolute bottom-0 right-0 w-48 h-48 md:w-72 md:h-72 bg-brand-purple rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
+        </div>
+        <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+            <h2 class="font-heading text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-4 md:mb-6" data-aos="fade-up">
+                Inspired By This Concept?
+            </h2>
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                This conceptual project demonstrates our strategic approach to brand transformation. Let's create a custom strategy for your business.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="zoom-in" data-aos-delay="200">
+                <a href="../../contact.html" class="holographic-button primary-button px-6 md:px-8 lg:px-12 py-3 md:py-4 rounded-full inline-block group text-base md:text-lg">
+                    <span>Start Your Project</span>
+                </a>
+                <a href="../../our-work.html" class="holographic-button secondary-button px-6 md:px-8 lg:px-12 py-3 md:py-4 rounded-full inline-block group text-base md:text-lg">
+                    <span>View More Work</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-primary py-8 md:py-12 border-t border-white/10">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="mb-2 md:mb-0 text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start">
+                        <img src="../../assets/images/logo.png" alt="Pictoishmi Logo" class="h-8 md:h-12 mr-3">
+                    </div>
+                    <p class="text-gray-400 mt-1 text-xs">Helping businesses grow digitally</p>
+                </div>
+
+                <div class="flex space-x-4">
+                    <a href="#" aria-label="Follow us on LinkedIn" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="../../assets/images/Linkdin-white.png" alt="LinkedIn">
+                    </a>
+                    <a href="https://www.facebook.com/pictoIshmimarketing" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="../../assets/images/facebook-white.png" alt="Facebook">
+                    </a>
+                    <a href="https://www.instagram.com/pictoishmi" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram" class="text-gray-400">
+                        <img class="w-5 h-5 md:w-6 md:h-6 transform transition duration-300 hover:scale-110" src="../../assets/images/IG-white.png" alt="Instagram">
+                    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 mt-6 md:mt-8 pt-6 md:pt-8">
+                <div class="flex flex-wrap justify-center gap-3 mb-4 text-xs md:text-sm">
+                    <a href="../../privacy-policy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="../../cookie-policy.html" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a>
+                    <a href="../../terms-of-service.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                </div>
+                <div class="text-center text-gray-500 text-sm md:text-base">
+                    <p>&copy; 2025 Pictoishmi. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+    // Initialize AOS animations
+    AOS.init({
+        duration: 800,
+        easing: 'ease-out-cubic',
+        once: true,
+        offset: 50,
+    });
+
+    // Mobile menu functionality - EXACT SAME AS INDEX.HTML
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navContainer = document.getElementById('nav-container');
+
+        // Toggle mobile menu
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu after clicking a link
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Navbar scroll effect - EXACT SAME AS INDEX.HTML
+        function updateNavbar() {
+            if (window.scrollY > 10) {
+                navContainer.style.background = 'rgba(0, 11, 62, 0.95)';
+                navContainer.style.backdropFilter = 'blur(20px)';
+            } else {
+                navContainer.style.background = 'rgba(255, 255, 255, 0.1)';
+                navContainer.style.backdropFilter = 'blur(16px)';
+            }
+        }
+
+        window.addEventListener('scroll', updateNavbar);
+        updateNavbar(); // Initialize navbar state
+
+        // ===== LAZY LOAD VIDEO SCRIPT =====
+            // This finds all "facades", waits for a click, then loads the iframe
+            const videoContainers = document.querySelectorAll('.reel-container[data-video-src]');
+            
+            videoContainers.forEach(container => {
+                const facade = container.querySelector('.video-facade');
+                const videoSrc = container.getAttribute('data-video-src');
+                
+                facade.addEventListener('click', function() {
+                    // Create the iframe element
+                    const iframe = document.createElement('iframe');
+                    iframe.setAttribute('src', videoSrc);
+                    iframe.setAttribute('width', '100%');
+                    iframe.setAttribute('height', '100%');
+                    iframe.setAttribute('frameborder', '0');
+                    iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share');
+                    iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+                    
+                    // Hide the facade
+                    facade.style.opacity = '0';
+                    setTimeout(() => {
+                        facade.style.display = 'none';
+                    }, 300);
+                    
+                    // Append iframe to container
+                    container.insertBefore(iframe, container.firstChild);
+                });
+            });
+
+        // Create floating particles - MOVED INSIDE THE SAME DOMCONTENTLOADED
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 100 + 50;
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 20 + 10;
+                const animationDelay = Math.random() * 5;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${left}%`;
+                particle.style.animationDuration = `${animationDuration}s`;
+                particle.style.animationDelay = `${animationDelay}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+        // ===== CAROUSEL SCRIPT =====
+        function moveCarousel(button, direction) {
+            // Find the parent grid item
+            const gridItem = button.closest('.grid-item');
+            // Find all images in this carousel
+            const images = gridItem.querySelectorAll('.carousel-img');
+            
+            // Find the currently active image index
+            let activeIndex = -1;
+            images.forEach((img, index) => {
+                if (img.classList.contains('active')) {
+                    activeIndex = index;
+                    img.classList.remove('active');
+                }
+            });
+            
+            // Calculate new index
+            let newIndex = activeIndex + direction;
+            
+            // Handle wrapping
+            if (newIndex < 0) {
+                newIndex = images.length - 1;
+            } else if (newIndex >= images.length) {
+                newIndex = 0;
+            }
+            
+            // Set new active image
+            images[newIndex].classList.add('active');
+        }   
+
+        // Initialize particles
+        createParticles();
+    });
+</script>
+</body>
+</html>

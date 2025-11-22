@@ -158,6 +158,91 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
+        /* Project Card Styles for Home/About Pages (Moved from Body) */
+        .project-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 240px;
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 11, 62, 0.2), rgba(0, 11, 62, 0.8));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-tag {
+            display: inline-block;
+            background: rgba(196, 123, 217, 0.2);
+            color: #c47bd9;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .view-project-btn {
+            background: rgba(196, 123, 217, 0.1);
+            color: #c47bd9;
+            border: 1px solid rgba(196, 123, 217, 0.3);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: auto;
+        }
+        
+        .view-project-btn:hover {
+            background: rgba(196, 123, 217, 0.2);
+            transform: translateY(-2px);
+        }
+
+
         /* ===== PARTICLE BACKGROUND ===== */
         .particles-container {
             position: absolute;
@@ -363,6 +448,7 @@
                     <div class="hidden md:flex items-center justify-center flex-1">
                         <div class="flex gap-8 lg:gap-12">
                             <a href="index.html" class="nav-link text-sm lg:text-base">Home</a>
+                            <a href="our-work.html" class="nav-link text-sm lg:text-base">Work</a>
                             <a href="about.html" class="nav-link active text-sm lg:text-base">About us</a>
                             <a href="services.html" class="nav-link text-sm lg:text-base">Services</a>
                             <a href="blog.html" class="nav-link text-sm lg:text-base">Blog</a>
@@ -394,6 +480,7 @@
         <div class="container mx-auto px-4 sm:px-6 py-4">
             <div class="flex flex-col space-y-3">
                 <a href="index.html" class="text-white hover:text-gray-200 transition-colors py-3 text-lg min-h-[44px] flex items-center">Home</a>
+                 <a href="our-work.html" class="text-white hover:text-gray-200 transition-colors py-3 text-lg min-h-[44px] flex items-center">Work</a>
                 <a href="about.html" class="text-white hover:text-gray-200 transition-colors py-3 text-lg min-h-[44px] flex items-center">About us</a>
                 <a href="services.html" class="text-white hover:text-gray-200 transition-colors py-3 text-lg min-h-[44px] flex items-center">Services</a>
                 <a href="blog.html" class="text-white hover:text-gray-200 transition-colors py-3 text-lg min-h-[44px] flex items-center">Blog</a>
@@ -441,7 +528,7 @@
                     <h2 class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-white">Our Story</h2>
                     <div class="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-300">
                         <p>
-                            <strong>We're a team of social media marketers who believe in keeping things simple and results-driven.</strong> No complicated processes or unnecessary formalities—just clear communication, flexible collaboration, and strategies that actually work.
+                            <strong>We're a team of social media marketers who believe in keeping things simple and results-driven.</strong> No complicated processes or unnecessary formalities just clear communication, flexible collaboration, and strategies that actually work.
                         </p>
                         <p>
                             Our approach is built around our clients' needs, not rigid systems. Whether it's growing your audience or turning engagement into real business results, we focus on what matters most: helping your brand win online.
@@ -676,6 +763,98 @@
             </div>
         </div>
     </section>
+
+    <!-- Compact Our Work Section for About Page -->
+<section class="py-12 md:py-16 bg-dark-primary/50">
+    <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10 md:mb-12" data-aos="fade-up">
+            <h2 class="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
+                Featured Work
+            </h2>
+            <p class="text-gray-300 max-w-xl mx-auto">
+                A glimpse of our successful projects that demonstrate our expertise and creative approach.
+            </p>
+        </div>
+
+         <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Project 1: Sparkle -->
+                <div class="project-card glass-card" data-aos="fade-up">
+                    <div class="project-image-container">
+                        <img 
+                            src="assets/images/sparkle-project-thumbnail.png" 
+                            alt="Sparkle Project"
+                            class="project-image"
+                        >
+                        <div class="project-overlay">
+                           
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="text-xl font-bold text-white mb-2">Sparkle</h3>
+                        <p class="text-gray-300 mb-4">Transforming a traditional household brand into a fresh, social-first presence.</p>
+                        <div class="mb-4">
+                            <span class="project-tag">Cleaning Products</span>
+                            <span class="project-tag">Social Media</span>
+                        </div>
+                        <a href="projects/sparkle_detergents/sparkle_detergents.html" class="view-project-btn">View Case Study</a>
+                    </div>
+                </div>
+                
+                <!-- Project 2: TechFlow -->
+                <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-image-container">
+                        <img 
+                            src="assets/images/kandy_fresh_fruit-case-thumbnail.png" 
+                            alt="TechFlow Project"
+                            class="project-image"
+                        >
+                        <div class="project-overlay">
+                            
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="text-xl font-bold text-white mb-2">Kandy Fresh Fruits</h3>
+                        <p class="text-gray-300 mb-4">Kandy Fresh Fruit Supplier establish a vibrant digital presence that showcases their premium quality.</p>
+                        <div class="mb-4">
+                            <span class="project-tag">Fruit Supplier</span>
+                            <span class="project-tag">Social Media</span>
+                        </div>
+                        <a href="projects/kandy_fresh_fruits/kandy_fresh_fruits_case.html" class="view-project-btn">View Case Study</a>
+                    </div>
+                </div>
+                
+                <!-- Project 3: UrbanEats -->
+                <div class="project-card glass-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-image-container">
+                        <img 
+                            src="assets/images/furniture_boulvard_casestudy.png" 
+                            alt="Furniture Project"
+                            class="project-image"
+                        >
+                        <div class="project-overlay">
+                           
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="text-xl font-bold text-white mb-2">Boulvard Furniture</h3>
+                        <p class="text-gray-300 mb-4">A concept rebrand transforming traditional furniture retail with modern strategy.</p>
+                        <div class="mb-4">
+                            <span class="project-tag">Furniture Store</span>
+                            <span class="project-tag">Content Creation</span>
+                        </div>
+                        <a href="projects/boulvard_furniture/furniture_boulvard_project.html" class="view-project-btn">View Case Study</a>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="text-center mt-8" data-aos="fade-up">
+            <a href="our-work.html" class="text-white hover:text-gray-300 transition-colors font-medium">
+                See all our work <span class="ml-1">→</span>
+            </a>
+        </div>
+    </div>
+</style>
 
     <!-- Meet the Founder Section -->
     <!-- <section class="py-12 sm:py-16 md:py-20 relative overflow-hidden">

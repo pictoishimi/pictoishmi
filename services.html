@@ -51,7 +51,7 @@
         /* nav / buttons / cards (kept original look) */
         nav { transition: all 0.25s ease; }
         .nav-link { color: white; transition: color 0.2s ease; font-weight: 500; text-decoration: none; }
-        .nav-link:hover { color: rgba(255,255,255,0.85); }
+        .nav-link:hover { color: #c47bd9;  }
         .nav-link.active { color: var(--brand-purple) !important; font-weight: 600; }
 
         .holographic-button { font-weight: 500; transition: all 0.25s ease; border: none; position: relative; overflow: hidden; z-index: 1; -webkit-tap-highlight-color: transparent; }
@@ -85,7 +85,7 @@
 
         .service-icon { width: 80px; height: 80px; display:flex; align-items:center; justify-content:center; border-radius:18px; background: linear-gradient(135deg,#f0e6f7,#fff); color: var(--brand-purple); box-shadow: 0 10px 15px -4px rgba(196,123,217,0.2); margin-bottom: 18px; flex-shrink: 0; }
 
-        .glass-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.25s ease; }
+        .glass-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.25s ease; }
         .glass-card:hover { transform: translateY(-5px); border-color: rgba(196,123,217,0.22); box-shadow: 0 18px 30px rgba(0,0,0,0.18); }
 
         .floating-element { animation: float 6s ease-in-out infinite; }
@@ -158,10 +158,10 @@
 
 
         @media (max-width: 768px) {
-            /* nav tweaks */
+            /* nav tweaks
             .nav-inner { gap: 8px; }
             .hero-title { font-size: 1.7rem; }
-            .hero-sub { font-size: 0.98rem; }
+            .hero-sub { font-size: 0.98rem; } */
 
             /* grid collapse -> single column stacks */
             .services-grid-lg { grid-template-columns: 1fr; gap: 1rem; }
@@ -209,6 +209,7 @@
 </head>
 <body class="font-sans bg-dark-primary min-h-screen text-white">
 
+  <!-- Navigation -->
     <nav class="fixed w-full z-50 px-4 pt-4">
         <div id="nav-container" class="backdrop-blur-lg bg-white/10 rounded-[50px] mx-2 sm:mx-4 transition-all duration-300">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
@@ -221,6 +222,7 @@
                     <div class="hidden md:flex items-center justify-center flex-1">
                         <div class="flex gap-8 lg:gap-12">
                             <a href="index.html" class="nav-link  text-sm lg:text-base">Home</a>
+                            <a href="our-work.html" class="nav-link  text-sm lg:text-base">Work</a>
                             <a href="about.html" class="nav-link text-sm lg:text-base">About us</a>
                             <a href="services.html" class="nav-link active text-sm lg:text-base">Services</a>
                             <a href="blog.html" class="nav-link text-sm lg:text-base">Blog</a>
@@ -248,8 +250,9 @@
         <div class="container mx-auto px-6 py-4">
             <div class="flex flex-col space-y-3">
                 <a href="index.html" class="text-white active hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Home</a>
+                 <a href="our-work.html" class="text-white  hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Work</a>
                 <a href="about.html" class="text-white hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">About us</a>
-                <a href="services.html" class="text-white hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Services</a>
+                <a href="services.html" class="text-white active hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Services</a>
                 <a href="blog.html" class="text-white hover:text-gray-200 transition-colors py-3 text-base border-b border-white/10">Blog</a>
                 <a href="contact.html" class="bg-white text-[#000B3E] px-6 py-3 rounded-full hover:bg-gray-100 transition-colors inline-block text-center font-medium mt-2 text-base">
                     Book a Free Call
@@ -257,6 +260,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Particles container (reduced on mobile by JS) -->
     <div id="particles-container" class="particles-container" aria-hidden="true"></div>
@@ -717,16 +721,16 @@
                 }
             });
 
-            // Navbar scroll effect
-            function updateNavbar() {
-                if (window.scrollY > 10) {
-                    navContainer.style.background = 'rgba(0, 11, 62, 0.95)';
-                    navContainer.style.backdropFilter = 'blur(20px)';
-                } else {
-                    navContainer.style.background = 'rgba(255, 255, 255, 0.1)';
-                    navContainer.style.backdropFilter = 'blur(16px)';
-                }
-            }
+            // Navbar scroll effect (from home page)
+function updateNavbar() {
+    if (window.scrollY > 10) {
+        navContainer.style.background = 'rgba(0, 11, 62, 0.95)';
+        navContainer.style.backdropFilter = 'blur(20px)';
+    } else {
+        navContainer.style.background = 'rgba(255, 255, 255, 0.1)';
+        navContainer.style.backdropFilter = 'blur(16px)';
+    }
+}
 
             window.addEventListener('scroll', updateNavbar);
             updateNavbar(); // Call once to set initial state
